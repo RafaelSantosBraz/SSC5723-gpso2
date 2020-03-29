@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
     */
 
     /*
-    * caminho para o novo processo.
+    * caminho para o novo programa.
     */
     char *const name = "./novo.out";
     /*
@@ -29,6 +29,8 @@ int main(int argc, char const *argv[])
     char *const value = "42";
     /*
     * array de argumentos que serão passados ao novo processo.
+    * O argumento NULL é necessário para indicar que o fim do array foi atingido, 
+    * uma vez que não é posível identificar o tamanho de um array por seu ponteiro.
     */
     char *const new_argv[3] = {name, value, NULL};
     /*
