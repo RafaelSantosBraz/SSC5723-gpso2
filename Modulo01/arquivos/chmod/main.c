@@ -10,15 +10,7 @@ int main(int argc, char const *argv[])
     printf("Permissões ANTES do chmod:\n");
     system(ls_command);
 
-    struct stat st;
-    __mode_t mode = S_IRWXU;
-
-    //stat(file_path, &st);
-
-    //mode = st.st_mode & 0777;
-    // modify mode
-    //mode &= ~(S_IWUSR); /* Clear this bit */
-    //mode |= S_IXUSR;    /* Set this bit   */
+    __mode_t mode = S_IRWXU|S_IROTH|S_IXOTH;
 
     int resp = chmod(file_path, mode);
 
@@ -30,6 +22,6 @@ int main(int argc, char const *argv[])
     {
         printf("Permissões DEPOIS do chmod:\n");
         system(ls_command);
-    }    
+    }
     return 0;
 }
