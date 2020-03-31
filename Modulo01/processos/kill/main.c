@@ -42,6 +42,6 @@ int main(void)
     }
 
 
-    printf("Regiao comum\n\n");
+    printf("Região comum\n\n");
     exit(0);
 }
