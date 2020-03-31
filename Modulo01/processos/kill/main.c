@@ -7,7 +7,7 @@
 int main(void)
 {
     /*
-	Este programa é o mesmo usado para demonstração do fork()
+	Este programa é semelhante ao usado para demonstração do fork()
 	Porém, foi adicionada uma chamada kill() para demonstrar sua execução
     */
     int i;
@@ -37,7 +37,7 @@ int main(void)
             e um sinal de valor 9, que equivale ao sinal SIGKILL, e então o processo será "morto".
 	    Assim, o restante do código não será executado pelo processo pai
 	*/
-	printf("\nProcesso pai morto: %d\n", kill(getpid(), 9));
+	kill(getpid(), 9);
         printf("pid do Pai: %d\n", getpid());
     }
 
