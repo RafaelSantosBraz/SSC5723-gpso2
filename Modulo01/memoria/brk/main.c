@@ -54,6 +54,13 @@ int main(int argc, char const *argv[])
     * Para isso, movimenta-se a barreira novamente para o program_break original.
     */
     resp = brk(program_break);    
-    
+    /*
+    * apenas verifica se o brk ocorreu da forma que deveria.
+    */
+    if (resp != 0)
+    {
+        printf("Não foi possível desalocar a memória :(\n");
+        return EXIT_FAILURE;
+    }
     return 0;
 }
