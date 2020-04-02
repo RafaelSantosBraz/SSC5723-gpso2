@@ -39,12 +39,18 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
         -rwx---rw- 1 gpos02 allusers 0 Apr  2 10:20 file.txt
         ```
 * **Open e Write** 
-    * Descrição:
-    * Como Utilizar:
+    * Descrição: o programa abre um arquivo de texto "arq.txt", carrega um buffer com caracteres e escreve o conteúdo do buffer no arquivo.
+    * Como Utilizar: o buffer é carregado no código do programa, portanto, basta executá-lo. O resultado pode ser visualizado abrindo o arquivo arq.txt após a execução.
     * Exemplo de Utilização:
         ```sh
-        $ comandos e 
-        $ saídas
+        $ ./main.out
+        
+        Conteúdo do buffer inserido no arquivo
+        
+        //O  conteúdo do arquivo pode ser visualizado pelo nano
+        $ nano arq.txt
+        Conteúdo do buffer inserido no arquivo
+        
         ```
 * **Brk** 
     * Descrição: o programa utiliza a primitiva brk para alocar 3 espaços de memória. O programa pede ao uuário para informar dois números que são armazenados nos dois primeiros espaços alocados. Depois os números informados são somados e o resultado é aramazenado no último espaço alocado. Por fim, o resultado é apresentado ao usuário.
@@ -79,20 +85,40 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
         Valor recebido: 42
         ```
 * **Fork** 
-    * Descrição:
-    * Como Utilizar:
+    * Descrição: o programa cria um processo filho e executa o código dos processos pai e filho. Por meio de um caractere char que é declarado antes da chamada fork e alterado posteriormente no processo pai, é possível verificar que seu valor e o mapeamento do caractere na memória continuam o mesmo para o processo filho.
+    * Como Utilizar: os parâmetros já são fornecidos no código do programa, portando, basta executá-lo.
     * Exemplo de Utilização:
         ```sh
-        $ comandos e 
-        $ saídas
+        $ ./main.out
+        pid = 29769
+
+        Executando o processo pai...
+        Caractere e Endereço: b - 0x7ffea8a77053
+        PID do Pai: 29769
+        Região comum
+
+        $ 
+        Executando o processo filho...
+        Caractere e endereço: a - 0x7ffea8a77053
+        PID do Filho: 29770
+        Região comum
+      
         ```
 * **Kill** 
-    * Descrição:
-    * Como Utilizar:
+    * Descrição: O programa cria um processo filho por meio da chamada fork. O código do processo filho é executado por completo, enquanto que a execução do código do processo pai é interrompida pela chamada de sistema kill, que envia um sinal para matar o processo.
+    * Como Utilizar: Todos os parâmetros já estão inclusos no código do programa, portanto, basta executá-lo.
     * Exemplo de Utilização:
         ```sh
-        $ comandos e 
-        $ saídas
+        $ ./main.out
+        pid = 29862
+
+        Executando o processo pai:
+        Killed
+        $ 
+        Executando o processo filho...
+        PID do Filho: 29863
+        Região comum
+        
         ```
 * **CPU-Bound** 
     * Descrição: o programa recebe um número inteiro como parâmetro e realiza o cálculo da soma de todos os números inteiros no intervalo entre 0 e o número informado, apresentando o resultado no final.
@@ -105,11 +131,31 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
         Soma: 45
         ```
 * **I/O-Bound** 
-    * Descrição:
-    * Como Utilizar:
+    * Descrição: o programa abre o arquivo "arq.txt" e realiza uma ou mais leituras de um buffer. A cada leitura, o conteúdo do buffer é escrito no arquivo.
+    * Como Utilizar: Quando o programa solicitar o texto a ser escrito no buffer, basta digitar um texto com até 127 caracteres e pressionar a tecla enter. Para continuar escrevendo, digite 's', ou, para encerrar o programa, digite 'n' ou qualquer outro caractere, e, por fim, tecle enter. O resultado pode ser conferido ao abrir o arquivo arq.txt.
     * Exemplo de Utilização:
         ```sh
-        $ comandos e 
-        $ saídas
+        $ ./main.out
+        
+        Digite uma linha de texto:linha 1
+
+        Continuar escrevendo? (s / n) s
+
+        Digite uma linha de texto:linha 2
+
+        Continuar escrevendo? (s / n) s
+
+        Digite uma linha de texto:linha 3
+
+        Continuar escrevendo? (s / n) n
+
+        $
+
+        //Texto escrito no arquivo arq.txt
+        $ nano arq.txt
+        linha 1
+        linha 2
+        linha 3
+
         ```
                 
