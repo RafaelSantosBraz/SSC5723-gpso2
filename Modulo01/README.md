@@ -9,18 +9,18 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
 
 * Chamadas de Sistema:
     * Arquivos:
-        * [Chmod](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/arquivos/chmod)
-        * [Open e Write](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/arquivos/open_write)
+        * [Chmod](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/arquivos/chmod/main.c)
+        * [Open e Write](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/arquivos/open_write/main.c)
     * Memória:
-        * [Brk](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/memoria/brk)
-        * [Mmap e Munmap](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/memoria/mmap_munmap)
+        * [Brk](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/memoria/brk/main.c)
+        * [Mmap e Munmap](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/memoria/mmap_munmap/main.c)
     * Processos:
-        * [Execve](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/processos/execve)
-        * [Fork](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/processos/fork)
-        * [Kill](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/processos/kill)
+        * [Execve](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/processos/execve/main.c)
+        * [Fork](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/processos/fork/main.c)
+        * [Kill](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/processos/kill/main.c)
 * Tipos de Processos:
-    * [CPU-Bound](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/cpu_bound)
-    * [I/O-Bound](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/IO_bound)
+    * [CPU-Bound](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/cpu_bound/main.c)
+    * [I/O-Bound](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/IO_bound/main.c)
     
 ****
 
