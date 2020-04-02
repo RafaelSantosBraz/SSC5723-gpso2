@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
     /*
     * exibição do resultado armazenado.
     */
-    printf("A soma dos dois número é: %d\n", *(int_ptr + 2));
+    printf("A soma dos dois números é: %d\n", *(int_ptr + 2));
     /*
     * utiliza-se o brk novamente para que os espaços de memória alocados sejam liberados.
     * Para isso, movimenta-se a barreira novamente para o program_break original.
