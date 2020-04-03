@@ -35,6 +35,8 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
       $ strace ./main.out
       $ strace -c ./main.out > /dev/null
    ```   
+   Documentação completa da ferramenta: http://man7.org/linux/man-pages/man1/strace.1.html 
+
 * A ferramenta time permite que a string com as saídas seja formatada:
    ```sh 
       $ /usr/bin/time -f "Tempo total: %e \n
@@ -45,7 +47,9 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
         Troca de contexto involuntária: %c \n
         Entradas no sistema de arquivos: %I \n
         Saídas no sistema de arquivos: %O \n\n" ./main.out
-   ```  
+   ```
+   Documentação completa da ferramenta: http://man7.org/linux/man-pages/man1/time.1.html
+   
 ****
 
 **Documentação dos Programas Desenvolvidos**
