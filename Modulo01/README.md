@@ -22,6 +22,30 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
     * [CPU-Bound](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/cpu_bound/main.c)
     * [I/O-Bound](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/IO_bound/main.c)
     
+* Commandos para uso da ferramenta strace:
+   * O programa main.c precisa ser primeiramente compilado: ```sh $ gcc main.c -o main.out```
+   * Comandos no strace para os programa fork.c e kill.c:
+      * Obs: Usar o parâmetro -f para que o strace rastreie também a execução dos procesos filhos.
+   ```sh 
+      $ strace -f ./main.out
+      $ strace -c -f ./main.out > /dev/null
+   ```
+   * Comandos no strace para os demais programas:
+   ```sh 
+      $ strace ./main.out
+      $ strace -c ./main.out > /dev/null
+   ```   
+* A ferramenta time permite que a string com as saídas seja formatada:
+   ```sh 
+      $ /usr/bin/time -f "Tempo total: %e \n
+        Porcentagem de uso do CPU: %P \n
+        Tempo em modo usuário: %U \n
+        Tempo em modo Kernel: %S \n
+        Troca de contexto voluntária: %w \n
+        Troca de contexto involuntária: %c \n
+        Entradas no sistema de arquivos: %I \n
+        Saídas no sistema de arquivos: %O \n\n" ./main.out
+   ```  
 ****
 
 **Documentação dos Programas Desenvolvidos**
