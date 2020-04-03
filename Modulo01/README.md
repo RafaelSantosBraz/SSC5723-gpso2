@@ -24,7 +24,7 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
     
 * Commandos para uso da ferramenta strace:
    * O programa main.c precisa ser primeiramente compilado: ```$ gcc main.c -o main.out```
-   * Comandos no strace para os programa fork.c e kill.c:
+   * Comandos no strace para os programa fork e kill:
       * Obs: Usar o parâmetro -f para que o strace rastreie também a execução dos procesos filhos.
    ```sh 
       $ strace -f ./main.out
