@@ -23,7 +23,7 @@ Algumas subdivisões foram criadas dentro dessas grandes categorias (clique no n
     * [I/O-Bound](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01/IO_bound/main.c)
     
 * Commandos para uso da ferramenta strace:
-   * O programa main.c precisa ser primeiramente compilado: ```sh $ gcc main.c -o main.out```
+   * O programa main.c precisa ser primeiramente compilado: ```$ gcc main.c -o main.out```
    * Comandos no strace para os programa fork.c e kill.c:
       * Obs: Usar o parâmetro -f para que o strace rastreie também a execução dos procesos filhos.
    ```sh 
