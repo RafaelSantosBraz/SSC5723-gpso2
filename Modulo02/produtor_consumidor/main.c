@@ -50,6 +50,7 @@ void *producer_routine()
     {
         // trava a mutex para poder manipular a região crítica.
         pthread_mutex_lock(&mutex_rc);
+        // se não houver espaço vazio para produzir no buffer, a thread espera por um sinal para acordar
         while (full == BUFFER_MAX)
         {
             pthread_cond_wait(&cond_producer, &mutex_rc);
