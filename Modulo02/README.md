@@ -19,4 +19,4 @@ Obs: o código do programa é totalmente estático, se desejar alterar a quantid
     4 25 
    ```   
 * Às macros MAX_NUMBERS e BUFFER_MAX foram atribuídos os valores 10 e 4, respectivamente. MAX_NUMBERS indica a quantidade total de números que serão produzidos/consumidos, e BUFFER_MAX define o tamanho do buffer utilizado para armazenar os números.
-Portando, na saída acima foram exibidos 10 números, agrupados em até 4 por linha,devido ao tamanho definido para o buffer.
+Portando, na saída acima foram exibidos 10 números, agrupados em até 4 por linha devido ao tamanho definido para o buffer.
