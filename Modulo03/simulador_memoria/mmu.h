@@ -77,6 +77,23 @@ typedef struct pages_table
 } PAGES_TABLE;
 
 /**
+ * retorna a quantidade de quadros de página atualmente em uso, isto é, atrelados a alguma página virtual.
+ * Se o vetor de status for NULL, ele será automaticamente inicializado.
+ */
+int get_number_of_used_frames(void);
+/**
+ * apenas aloca a memória para o vetor frames_status e marca todas as posições como NOT_PRESENT.
+ */
+void initialize_frames(void);
+/**
+ * marca o status do quadro de página informado (vetor de bits de seu número) com o valor indicado no último parâmetro.
+ * Utiliza a mesma tag PRESENT ou NOT_PRESENT para indicar se está sendo ou usado ou não, respectivamente.
+ * O tamanho do vetor é constante e é representando por FRAME_NUMBER_LEN.
+ * Se tudo ocorrer conforme o esperado, o ponteiro informado será retornado (!= NULL).
+ * Se NULL for retornado, o número do quadro não pertence ao escopo do número de quadros existentes.
+ */
+int *mark_frame(int *, int);
+/**
  * cria uma nova tabela de páginas para um processo e a retorna.
  */
 PAGES_TABLE *create_and_assign_pages_table(void);
@@ -89,5 +106,5 @@ PAGES_TABLE *create_and_assign_pages_table(void);
  * Se o valor NULL for retornado e o último parâmetro for diferente de NULL, significa que ocorreu uma falta de página que precisa ser tratada.
  * Se o valor NULL for retornado e o último parâmetro também for NULL, significa que um erro ocorreu se segmentação que deve ser tratado.
  */
-ADDRESS *map_to_physical_address(ADDRESS *, PAGES_TABLE*, char, int*);
+ADDRESS *map_to_physical_address(ADDRESS *, PAGES_TABLE *, char, int *);
 #endif

@@ -4,6 +4,48 @@
 #include <stdio.h>
 #include "request.h"
 
+/**
+ * vetor que marca, para cada quadro de página, se ele está atualmente atrelado a alguma página virtual,
+ * isto é, se ele está sendo usado.
+ * Utiliza a mesma tag PRESENT ou NOT_PRESENT para indicar se está sendo ou usado ou não, respectivamente.
+ * O tamanho do vetor é constante e é representando por NUMBER_OF_FRAMES.
+ */
+int *frames_status = NULL;
+
+void initialize_frames()
+{
+    frames_status = malloc(sizeof(int) * NUMBER_OF_FRAMES);
+    for (int i = 0; i < NUMBER_OF_FRAMES; i++)
+    {
+        frames_status[i] = NOT_PRESENT;
+    }
+}
+
+int get_number_of_used_frames()
+{
+    int count = 0;
+    if (frames_status == NULL)
+    {
+        initialize_frames();
+    }
+    for (int i = 0; i < NUMBER_OF_FRAMES; i++)
+    {
+        count += frames_status[i];
+    }
+    return count;
+}
+
+int *mark_frame(int *frame_number_bits, int status)
+{
+    int frame_number = get_decimal_from_bits(frame_number_bits, FRAME_NUMBER_LEN);
+    if (frame_number >= 0 && frame_number < NUMBER_OF_FRAMES)
+    {
+        frames_status[frame_number] = status;
+        return frame_number_bits;
+    }
+    return NULL;
+}
+
 PAGES_TABLE *create_and_assign_pages_table()
 {
     PAGES_TABLE *table = malloc(sizeof(PAGES_TABLE));
