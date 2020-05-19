@@ -1,3 +1,5 @@
+# compilação automática do programa.
+
 shopt -s globstar
 
 for file in *.*
@@ -8,4 +10,4 @@ do
     fi
 done
 
-gcc ${var} -o main.out
+gcc ${var} -o main.out -lm
