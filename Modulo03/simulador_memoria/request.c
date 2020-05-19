@@ -38,8 +38,10 @@ void receive_request(REQUEST *request)
             break;
         }
         process->pages_table = create_and_assign_pages_table();
+        // política de alocação inicial aqui.
         printf("Processo '%s' criado.\n", process->process_ID);
         printf("%s\n", get_bits_string_address(process->swap_area->last_address));
+        printf("%llu\n", process->swap_area->last_address->decimal);
         break;
     }
     }

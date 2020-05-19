@@ -38,3 +38,44 @@ PROCESS_SWAP_AREA *create_process_swap_area(int image_size)
     }
     return swap_area;
 }
+
+int *get_page_in_disc(PROCESS_SWAP_AREA *swap_area, int *page_number_bits)
+{
+    if (page_number_bits == NULL)
+    {
+        printf("A página não pode ser buscada no disco, pois o valor 'NULL' é inválido.\n");
+        return NULL;
+    }
+    int page_number = get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN);
+    if (page_number >= swap_area->first_address->decimal && page_number <= swap_area->last_address->decimal)
+    {
+        return page_number_bits;
+    }
+    else
+    {
+        printf("A página '%d' (%s) não pode ser buscada no disco! Endereço fora do escopo da imagem do processo.\n",
+               page_number,
+               get_bits_string_from_bits(page_number_bits, PAGE_NUMBER_LEN));
+        return NULL;
+    }
+}
+
+PAGE *send_page_to_disc(PROCESS_SWAP_AREA *swap_area, PAGE *virtual_page, int *page_number_bits)
+{
+    int page_number = get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN);
+    if (page_number >= swap_area->first_address->decimal && page_number <= swap_area->last_address->decimal)
+    {
+        printf("A página '%d' (%s) foi enviada para o disco.\n",
+               page_number,
+               get_bits_string_from_bits(page_number_bits, PAGE_NUMBER_LEN));
+        virtual_page->modified = NOT_MODIFIED;
+        return virtual_page;
+    }
+    else
+    {
+        printf("A página '%d' (%s) não pode ser enviada para o disco! Endereço fora do escopo da imagem do processo.\n",
+               page_number,
+               get_bits_string_from_bits(page_number_bits, PAGE_NUMBER_LEN));
+        return NULL;
+    }
+}

@@ -43,14 +43,10 @@ ADDRESS *map_to_physical_address(ADDRESS *virtual_address, PAGES_TABLE *table, c
                 physical_bits[i] = virtual_address->bits[i];
             }
             physical_address = get_address_from_bits(physical_bits, PHYSICAL_ADDRESS_SIZE);
-            if (op == R)
+            // sempre marca como referenciada, nesse caso.
+            table->pages[page_number].referenced++;
+            if (op == W)
             {
-                table->pages[page_number].referenced++;
-            }
-            else
-            {
-                // marca como referenciada também, pois se ela foi modificada teve que ser acessada.
-                table->pages[page_number].referenced++;
                 table->pages[page_number].modified = MODIFIED;
             }
         }
