@@ -55,7 +55,7 @@ PAGE *insert_page(PAGE *page)
     }
 }
 
-void initialize_list()
+void initialize_global_list()
 {
     switch (CURRENT_METHOD)
     {

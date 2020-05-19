@@ -38,7 +38,7 @@ PAGE *insert_page(PAGE *);
 /**
  * inicializa a lista global de páginas ativas.
  */
-void initialize_list(void);
+void initialize_global_list(void);
 /**
  * Seção principal dos algortimos de substituição de páginas.
  * Esta função é acionada quando ocorrer uma falta de página e não existirem quadros de páginas livres.
