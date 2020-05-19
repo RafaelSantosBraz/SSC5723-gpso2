@@ -40,12 +40,17 @@ ADDRESS *get_address_from_bits(int *bits, int size)
     ADDRESS *address = malloc(sizeof(ADDRESS));
     address->size = size;
     address->bits = bits;
+    address->decimal = get_decimal_from_bits(bits, size);
+    return address;
+}
+
+unsigned long long get_decimal_from_bits(int *bits, int size)
+{
     unsigned long long decimal = 0;
     int expo = size - 1;
     for (int i = 0; i < size; i++)
     {
         decimal += bits[i] * pow(2, expo--);
     }
-    address->decimal = decimal;
-    return address;
+    return decimal;
 }

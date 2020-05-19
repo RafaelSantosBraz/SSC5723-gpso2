@@ -32,6 +32,11 @@ ADDRESS *get_address_from_decimal(unsigned long long, int);
  */
 int *get_bits_from_decimal(unsigned long long, int);
 /**
+ * retorna um número decimal que representa o vetor de bits informado.
+ * O int indica qual o tamanho do vetor de bits informado.
+ */
+unsigned long long get_decimal_from_bits(int *, int);
+/**
  * cria e inicializa um novo endereço através de sua representação binária.
  * Recebe o vetor de bits e seu tamanho.
  */
