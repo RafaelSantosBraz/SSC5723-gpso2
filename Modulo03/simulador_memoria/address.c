@@ -26,13 +26,7 @@ int *get_bits_from_decimal(unsigned long long decimal, int bits_size)
 
 char *get_bits_string_address(ADDRESS *address)
 {
-    char *formated = malloc(sizeof(char) * address->size + 1);
-    for (int i = 0; i < address->size; i++)
-    {
-        formated[i] = address->bits[i] == 1 ? '1' : '0';
-    }
-    formated[address->size] = '\0';
-    return formated;
+    return get_bits_string_from_bits(address->bits, address->size);
 }
 
 ADDRESS *get_address_from_bits(int *bits, int size)
@@ -53,4 +47,15 @@ unsigned long long get_decimal_from_bits(int *bits, int size)
         decimal += bits[i] * pow(2, expo--);
     }
     return decimal;
+}
+
+char *get_bits_string_from_bits(int *bits, int size)
+{
+    char *formated = malloc(sizeof(char) * size + 1);
+    for (int i = 0; i < size; i++)
+    {
+        formated[i] = bits[i] == 1 ? '1' : '0';
+    }
+    formated[size] = '\0';
+    return formated;
 }

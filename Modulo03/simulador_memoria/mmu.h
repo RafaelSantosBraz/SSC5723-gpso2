@@ -2,6 +2,7 @@
 #define MMU_H
 
 #include "config.h"
+#include "address.h"
 
 /**
  * indica que a página foi modificada.
@@ -28,9 +29,13 @@
  */
 #define NUMBER_OF_FRAMES (RAM_SIZE / FRAME_SIZE)
 /**
- * indica quantas quadros bits são necessários para representar o número do quadro de página.
+ * indica quantos bits são necessários para representar o número do quadro de página.
  */
 #define FRAME_NUMBER_LEN get_bits_len(NUMBER_OF_FRAMES)
+/**
+ * indica quantos bits são necessários para representar o número da página.
+ */
+#define PAGE_NUMBER_LEN get_bits_len(NUMBER_OF_PAGES)
 
 /**
  * representa a estrutura de uma página.
@@ -75,5 +80,14 @@ typedef struct pages_table
  * cria uma nova tabela de páginas para um processo e a retorna.
  */
 PAGES_TABLE *create_and_assign_pages_table(void);
-
+/**
+ * converte um dado endereço virtual em seu correspondente endereço físico com base na tabela de páginas atual.
+ * O char representa se é uma operação de escrita ou leitura sobre o endereço solicitado.
+ * O último parâmetro é usado para retorno da função, indicando qual o número da página virtual (em um vetor de bits),
+ * que foi ou tentou ser acessada. O tamanho desse vetor é constante e é definido por PAGE_NUMBER_LEN.
+ * -- Usar as tags R ou W já existentes.
+ * Se o valor NULL for retornado e o último parâmetro for diferente de NULL, significa que ocorreu uma falta de página que precisa ser tratada.
+ * Se o valor NULL for retornado e o último parâmetro também for NULL, significa que um erro ocorreu se segmentação que deve ser tratado.
+ */
+ADDRESS *map_to_physical_address(ADDRESS *, PAGES_TABLE*, char, int*);
 #endif

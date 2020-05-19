@@ -46,5 +46,10 @@ ADDRESS *get_address_from_bits(int *, int);
  * Usado para exibição.
  */
 char *get_bits_string_address(ADDRESS *);
-
+/**
+ * retorna um vetor de char que representa o vetor de bits informado.
+ * O int é o tamanho do vetor de bits informado.
+ * Usado para exibição.
+ */
+char *get_bits_string_from_bits(int *, int);
 #endif
