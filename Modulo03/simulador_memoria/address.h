@@ -27,6 +27,11 @@ typedef struct address
  */
 ADDRESS *get_address_from_decimal(unsigned long long, int);
 /**
+ * retorna um vetor de bits através de sua representação em decimal informada.
+ * O int indica qual o tamanho do vetor de bits a ser gerado, pois varia para o endereço lógico e físico.
+ */
+int *get_bits_from_decimal(unsigned long long, int);
+/**
  * cria e inicializa um novo endereço através de sua representação binária.
  * Recebe o vetor de bits e seu tamanho.
  */

@@ -46,6 +46,11 @@ PROCESS_IN_LIST *find_last();
 PROCESS *create_and_assign_process()
 {
     PROCESS *process = malloc(sizeof(PROCESS));
+    process->image_size = 0;
+    process->process_ID = NULL;
+    process->status = -1;
+    process->swap_area = NULL;
+    process->pages_table = NULL;
     if (process_table == NULL)
     {
         initialize_list();
@@ -54,7 +59,7 @@ PROCESS *create_and_assign_process()
     PROCESS_IN_LIST *current = malloc(sizeof(PROCESS_IN_LIST));
     current->next = NULL;
     current->process = process;
-    if (find_last == NULL)
+    if (last == NULL)
     {
         process_table->start = current;
     }

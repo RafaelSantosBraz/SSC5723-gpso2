@@ -6,6 +6,9 @@
 
 #include "request.h"
 
+/**
+ * indica o tamanho máximo do buffer de memória para cada linha do arquivo.
+ */
 #define LINE_MAX 150
 
 void read_input_file()

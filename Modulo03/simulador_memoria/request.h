@@ -2,6 +2,27 @@
 #define REQUEST_H
 
 /**
+ * tag de execução de uma instrução.
+ */
+#define P 'P'
+/**
+ * tag de E/S.
+ */
+#define I 'I'
+/**
+ * tag de leitura.
+ */
+#define R 'R'
+/**
+ * tag de escrita.
+ */
+#define W 'W'
+/**
+ * tag de criação de um processo.
+ */
+#define C 'C'
+
+/**
  * estrutura que agrupa as informações de cada requisição para o 
  * simulador.
  */

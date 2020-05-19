@@ -2,6 +2,7 @@
 #define PROCESS_H
 
 #include "swap.h"
+#include "mmu.h"
 
 /**
  * indica que o processo está suspenso na área de troca em disco.
@@ -36,7 +37,10 @@ typedef struct process
      * ponteiro para entrada da área do processo na área de troca (swap) no disco.
      */
     PROCESS_SWAP_AREA *swap_area;
-    // falta o endereço para a tabela de páginas
+    /**
+     * ponteiro para a entrada da tabela de páginas do processo.
+     */
+    PAGES_TABLE *pages_table;
 } PROCESS;
 
 /**
