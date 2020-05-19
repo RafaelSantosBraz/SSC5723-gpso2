@@ -41,10 +41,17 @@ int get_bits_len(int);
  * -- deve ser capaz de endereçar toda a memória física real.
  */
 #define PHYSICAL_ADDRESS_SIZE get_bits_len(RAM_SIZE)
-
+/**
+ * representa o algoritmo de substituição de páginas LRU.
+ */
 #define LRU 0
+/**
+ * representa o algoritmo de substituição de páginas do relógio.
+ */
 #define CLOCK 1
-
+/**
+ * marca qual algoritmo de substituição de páginas está sendo aplicado no simulador.
+ */
 #define CURRENT_METHOD LRU
 
 #endif

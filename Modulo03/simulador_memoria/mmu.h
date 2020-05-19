@@ -100,9 +100,9 @@ PAGES_TABLE *create_and_assign_pages_table(void);
 /**
  * converte um dado endereço virtual em seu correspondente endereço físico com base na tabela de páginas atual.
  * O char representa se é uma operação de escrita ou leitura sobre o endereço solicitado.
+ * -- Usar as tags R ou W já existentes.
  * O último parâmetro é usado para retorno da função, indicando qual o número da página virtual (em um vetor de bits),
  * que foi ou tentou ser acessada. O tamanho desse vetor é constante e é definido por PAGE_NUMBER_LEN.
- * -- Usar as tags R ou W já existentes.
  * Se o valor NULL for retornado e o último parâmetro for diferente de NULL, significa que ocorreu uma falta de página que precisa ser tratada.
  * Se o valor NULL for retornado e o último parâmetro também for NULL, significa que um erro ocorreu se segmentação que deve ser tratado.
  */
