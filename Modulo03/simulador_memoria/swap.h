@@ -2,7 +2,6 @@
 #define SWAP_H
 
 #include "config.h"
-#include "process.h"
 #include "address.h"
 
 /**
@@ -10,11 +9,7 @@
  * Guarda a imagem do processo em disco.
  */
 typedef struct process_swap_area
-{
-    /**
-     * ponteiro para o processo que é dono desta área de troca.
-     */
-    PROCESS *process;
+{    
     /**
      * ponteiro para o primeiro endereço válido desta área de troca.
      */
@@ -30,8 +25,8 @@ typedef struct process_swap_area
  */
 int get_used_swap(void);
 /**
- * cria e vincula uma nova área de troca em disco para o processo informado.
+ * cria e vincula uma nova área de troca em disco com o tamanho de imagem especificado.
  */
-PROCESS_SWAP_AREA *create_process_swap_area(PROCESS *);
+PROCESS_SWAP_AREA *create_process_swap_area(int);
 
 #endif
