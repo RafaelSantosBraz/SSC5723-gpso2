@@ -68,4 +68,11 @@ PROCESS *choose_process_to_sleep(void);
  * -- Baixa probabilidade de um erro ocorrer, pois o processo em execução possui todas as áreas reservadas para ele.
  */
 PROCESS *go_to_sleep(PROCESS *);
+/**
+ * realiza a busca do processo na área de troca em disco de volta para a memória principal.
+ * Esta função também já solicita a inclusão do mapa de memória local e global do processo.
+ * Se tudo der certo, o ponteiro para o processo informado será retornado (!= NULL).
+ * Se NULL for retornado, não foi possível acordar o processo e a situação deve ser tratada.
+ */
+PROCESS *wake_up(PROCESS *);
 #endif

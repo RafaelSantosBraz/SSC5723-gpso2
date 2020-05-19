@@ -163,5 +163,13 @@ PROCESS *go_to_sleep(PROCESS *process)
     {
         return NULL;
     }
+    process->status = IN_DISC;
+    return process;
+}
+
+PROCESS *wake_up(PROCESS *process)
+{
+    printf("Acordando o Processo '%s'...\n", process->process_ID);
+    // implementação aqui.
     return process;
 }
