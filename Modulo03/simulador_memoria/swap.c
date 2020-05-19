@@ -79,3 +79,45 @@ PAGE *send_page_to_disc(PROCESS_SWAP_AREA *swap_area, PAGE *virtual_page, int *p
         return NULL;
     }
 }
+
+PAGES_TABLE *send_whole_pages_table_to_disc(PROCESS_SWAP_AREA *swap_area, PAGES_TABLE *pages_table)
+{
+    printf("Enviando todas as págins modificadas do processo para o disco...\n");
+    for (int i = 0; i < NUMBER_OF_PAGES; i++)
+    {
+        if (pages_table->pages[i].present == PRESENT && pages_table->pages[i].modified == MODIFIED)
+        {
+            if (send_page_to_disc(swap_area, &pages_table->pages[i], get_bits_from_decimal(i, PAGE_NUMBER_LEN)) == NULL)
+            {
+                return NULL;
+            }
+        }
+    }
+    return pages_table;
+}
+
+int **get_pages_set_in_disc(PROCESS_SWAP_AREA *swap_area, int **pages_set, int size)
+{
+    printf("Buscando conjunto de páginas no disco...\n");
+    if (pages_set != NULL)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (get_page_in_disc(swap_area, pages_set[i]) == NULL)
+            {
+                return NULL;
+            }
+        }
+        return pages_set;
+    }
+    pages_set = malloc(sizeof(int *) * size);
+    for (int i = 0; i < size; i++)
+    {
+        pages_set[i] = get_bits_from_decimal(i, PAGE_NUMBER_LEN);
+        if (get_page_in_disc(swap_area, pages_set[i]) == NULL)
+        {
+            return NULL;
+        }
+    }
+    return pages_set;
+}

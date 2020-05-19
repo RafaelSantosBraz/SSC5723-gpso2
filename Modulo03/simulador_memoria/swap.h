@@ -48,4 +48,22 @@ int *get_page_in_disc(PROCESS_SWAP_AREA *, int *);
  * Se o valor NULL for retornado, a página não é válida para a imagem do processo.
  */
 PAGE *send_page_to_disc(PROCESS_SWAP_AREA *, PAGE *, int *);
+/**
+ * envia todas as páginas da tabela de páginas informada que foram modificadas para o disco.
+ * Esta função já altera o bit de modificação de cada página para NOT_MODIFIED, mas deixa o bit "present" como estava,
+ * pois esta função apenas copia as páginas modificadas para o disco, não exclui seu mapeamento.
+ * Precisa receber o ponteiro para a tabela de páginas.
+ * Se tudo ocorrer conforme o esperado, será retornado o mesmo ponteiro para a tabela de páginas (!= NULL) informado.
+ * Se o valor NULL for retornado, alguma(s) das páginas estão inconsistentes.
+ */
+PAGES_TABLE *send_whole_pages_table_to_disc(PROCESS_SWAP_AREA *, PAGES_TABLE *);
+/**
+ * busca no disco um conjunto de páginas informadas. É preciso informar um vetor que contém os números das páginas 
+ * (vetor de bits)que serão trazidas da memória. O parâmetro int (size) é o tamanho do conjunto de páginas a serem buscadas.
+ * Caso o conjunto informado seja NULL, a quatidade páginas indicada por size será trazida da memória, começando pela página
+ * 0 e, sequencialmente, até a página (size - 1). -- Esta opção é útil para criar o conunto de páginas de um processo novo.
+ * Se tudo ocorrer conforme o esperado, o ponteiro para o conunto de página será retornado (!= NULL).
+ * Se o valor NULL for retornado, alguma(s) das páginas estão inconsistentes.
+ */
+int **get_pages_set_in_disc(PROCESS_SWAP_AREA *, int **, int);
 #endif
