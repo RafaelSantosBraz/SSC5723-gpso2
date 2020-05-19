@@ -12,6 +12,23 @@
  */
 int *frames_status = NULL;
 
+/**
+ * O contador global de instruções inicia com 0 e é incrementado automaticamente conforme novas requisições chegam
+ * (incrementado no arquivo 'request').
+ * Este contador é utilizado quando o algortimo LRU está habilitado.
+ */
+int global_instruction_counter = 0;
+
+int get_global_instruction_counter()
+{
+    return global_instruction_counter;
+}
+
+void inc_global_instruction_counter()
+{
+    global_instruction_counter++;
+}
+
 void initialize_frames()
 {
     frames_status = malloc(sizeof(int) * NUMBER_OF_FRAMES);
@@ -27,6 +44,7 @@ int get_number_of_used_frames()
     if (frames_status == NULL)
     {
         initialize_frames();
+        return 0;
     }
     for (int i = 0; i < NUMBER_OF_FRAMES; i++)
     {
@@ -37,6 +55,10 @@ int get_number_of_used_frames()
 
 int *mark_frame(int *frame_number_bits, int status)
 {
+    if (frames_status == NULL)
+    {
+        initialize_frames();
+    }
     int frame_number = get_decimal_from_bits(frame_number_bits, FRAME_NUMBER_LEN);
     if (frame_number >= 0 && frame_number < NUMBER_OF_FRAMES)
     {
@@ -108,4 +130,14 @@ ADDRESS *map_to_physical_address(ADDRESS *virtual_address, PAGES_TABLE *table, c
         page_number_bits = NULL;
     }
     return physical_address;
+}
+
+int count_mapped_pages(PAGES_TABLE *table)
+{
+    int count = 0;
+    for (int i = 0; i < NUMBER_OF_PAGES; i++)
+    {
+        count += table->pages[i].present;
+    }
+    return count;
 }

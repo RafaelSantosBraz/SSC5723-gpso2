@@ -77,6 +77,21 @@ typedef struct pages_table
 } PAGES_TABLE;
 
 /**
+ * Retorna o contador global de instruções.
+ * O contador global de instruções inicia com 0 e é incrementado automaticamente conforme novas requisições chegam
+ * (incrementado no arquivo 'request').
+ * Este contador é utilizado quando o algortimo LRU está habilitado.
+ */
+int get_global_instruction_counter(void);
+/**
+ * Incrementa em 1 o contador global de instruções.
+ * O contador global de instruções inicia com 0 e é incrementado automaticamente conforme novas requisições chegam
+ * (incrementado no arquivo 'request').
+ * Este contador é utilizado quando o algortimo LRU está habilitado.
+ */
+void inc_global_instruction_counter(void);
+
+/**
  * retorna a quantidade de quadros de página atualmente em uso, isto é, atrelados a alguma página virtual.
  * Se o vetor de status for NULL, ele será automaticamente inicializado.
  */
@@ -107,4 +122,9 @@ PAGES_TABLE *create_and_assign_pages_table(void);
  * Se o valor NULL for retornado e o último parâmetro também for NULL, significa que um erro ocorreu se segmentação que deve ser tratado.
  */
 ADDRESS *map_to_physical_address(ADDRESS *, PAGES_TABLE *, char, int *);
+/**
+ * retorna a quantidade de páginas ativas na tabela de páginas informada.
+ * Páginas ativas são aquelas que levam para um quadro de página válido na memória principal.
+ */
+int count_mapped_pages(PAGES_TABLE*);
 #endif
