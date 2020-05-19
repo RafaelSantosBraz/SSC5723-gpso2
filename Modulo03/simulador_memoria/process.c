@@ -2,6 +2,9 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
+#include <stdio.h>
+#include "inter_alg.h"
 
 /**
  * representa um processo em lista encadeada.
@@ -103,4 +106,62 @@ PROCESS *find_process(char *process_ID)
         current = current->next;
     }
     return the_process;
+}
+
+PROCESS *choose_process_to_sleep(void)
+{
+    PROCESS_IN_LIST *current = process_table->start;
+    PROCESS *the_process = NULL;
+    int most_number = INT_MIN;
+    while (current != NULL)
+    {
+        if (current->process->process_ID != NULL && strcmp(current->process->process_ID, "") != 0)
+        {
+            if (current->process->status == IN_RAM)
+            {
+                int aux = count_mapped_pages(current->process->pages_table);
+                if (aux > most_number)
+                {
+                    most_number = aux;
+                    the_process = current->process;
+                }
+            }
+        }
+        current = current->next;
+    }
+    return the_process;
+}
+
+PROCESS *go_to_sleep(PROCESS *process)
+{
+    // tabela de páginas local anterior é mantida para que
+    // a restauração eficiente possa ser aplicada em sua reentrada na RAM.
+    printf("Suspendento o Processo '%s'...\n", process->process_ID);
+    if (send_whole_pages_table_to_disc(process->swap_area, process->pages_table) == NULL)
+    {
+        return NULL;
+    }
+    // quadros de página liberados.
+    for (int i = 0; i < NUMBER_OF_PAGES; i++)
+    {
+        if (process->pages_table->pages[i].present == PRESENT)
+        {
+            mark_frame(process->pages_table->pages[i].frame_number, NOT_PRESENT);
+        }
+    }
+    int number_mapped = count_mapped_pages(process->pages_table);
+    PAGE *mapped_pages = malloc(sizeof(PAGE) * number_mapped);
+    int count = 0;
+    for (int i = 0; i < NUMBER_OF_PAGES; i++)
+    {
+        if (process->pages_table->pages[i].present == PRESENT)
+        {
+            mapped_pages[count++] = process->pages_table->pages[i];
+        }
+    }
+    if (remove_set_of_pages(mapped_pages, number_mapped) == NULL)
+    {
+        return NULL;
+    }
+    return process;
 }

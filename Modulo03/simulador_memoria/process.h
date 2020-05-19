@@ -51,5 +51,21 @@ PROCESS *create_and_assign_process(void);
  * retorna o processo que possui o process_ID fornecido para busca.
  */
 PROCESS *find_process(char *);
-
+/**
+ * determina, por meio da política de suspensão de processos, qual o melhor processo para ser mandado ao disco,
+ * tendo-se por objetivo abrir espaço na memória principal para um processo ser executado (novo ou retornado do disco).
+ * -- Política atual: Processo IN_RAM que possui o maior número páginas mapeadas deve ser suspenso com o objetivo de evitar
+ * ao máximo a falta de páginas do novo processo, já que a transferência de uma pequena ou grande quantidade de páginas para o disco
+ * não difere muito significativamente.
+ * Se NULL for retornado, nenhum processo está ativo na memória principal no momento.
+ */
+PROCESS *choose_process_to_sleep(void);
+/**
+ * realiza a suspensão de um processo o enviando para a área de troca no disco.
+ * Esta função também já solicita a libera do mapa de memória local e global do processo.
+ * Se tudo der certo, o ponteiro para o processo informado será retornado (!= NULL).
+ * Se NULL for retornado, não foi possível suspender o processo e a situação deve ser tratada.
+ * -- Baixa probabilidade de um erro ocorrer, pois o processo em execução possui todas as áreas reservadas para ele.
+ */
+PROCESS *go_to_sleep(PROCESS *);
 #endif
