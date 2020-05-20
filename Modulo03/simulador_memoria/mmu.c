@@ -53,6 +53,11 @@ int get_number_of_used_frames()
     return count;
 }
 
+int get_number_of_free_frames()
+{
+    return NUMBER_OF_FRAMES - get_number_of_used_frames();
+}
+
 int *mark_frame(int *frame_number_bits, int status)
 {
     if (frames_status == NULL)

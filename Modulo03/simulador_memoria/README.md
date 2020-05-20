@@ -1,7 +1,5 @@
 # TODO
 
-Criar função get_number_of_free_frames na MMU.
-
 Criar fuções de print das estruturas/tabelas envolvidas nos respectivos arquivos.
 
 Aplicar a política de alocação inicial: 15% da imagem do processo (os quadros são a unidade, por exemplo 15% de algum processo poderia ser 6 quadros a serem alocados). Alocadas a partir do início do endereçamento na alocação inicial.

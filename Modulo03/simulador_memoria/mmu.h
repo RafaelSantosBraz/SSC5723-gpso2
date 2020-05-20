@@ -99,6 +99,11 @@ void inc_global_instruction_counter(void);
  */
 int get_number_of_used_frames(void);
 /**
+ * retorna a quantidade de quadros de página atualmente livres, isto é, NÃO atrelados a alguma página virtual.
+ * Se o vetor de status for NULL, ele será automaticamente inicializado.
+ */
+int get_number_of_free_frames(void);
+/**
  * apenas aloca a memória para o vetor frames_status e marca todas as posições como NOT_PRESENT.
  */
 void initialize_frames(void);
