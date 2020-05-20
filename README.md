@@ -6,3 +6,4 @@ O presente repositório armazena os códigos desenvolvidos durante o trabalho da
 
 * [Mólulo 01](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo01)
 * [Mólulo 02](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo02)
+* [Mólulo 03](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo03)
