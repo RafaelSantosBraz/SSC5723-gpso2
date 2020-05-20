@@ -43,7 +43,9 @@
 typedef struct page
 {
     /**
-     * indica se a página foi referenciada. -- contador começa com 0 (valor 0 atribuído quando a página é criada).
+     * indica se a página foi referenciada. -- 'contador' começa com 0 (valor 0 atribuído quando a página é criada).
+     * Quando a página é referenciada, a MMU troca automaticamente o valor deste campo para o contador 
+     * global de instruções se o LRU está habilitado. Se o CLOCK está habiltado, o valor 1 é atribuído.
      */
     int referenced;
     /**
@@ -126,5 +128,5 @@ ADDRESS *map_to_physical_address(ADDRESS *, PAGES_TABLE *, char, int *);
  * retorna a quantidade de páginas ativas na tabela de páginas informada.
  * Páginas ativas são aquelas que levam para um quadro de página válido na memória principal.
  */
-int count_mapped_pages(PAGES_TABLE*);
+int count_mapped_pages(PAGES_TABLE *);
 #endif
