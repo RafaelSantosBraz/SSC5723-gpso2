@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "request.h"
+#include "inter_alg.h"
 
 /**
  * vetor que marca, para cada quadro de página, se ele está atualmente atrelado a alguma página virtual,
@@ -69,6 +70,27 @@ int *mark_frame(int *frame_number_bits, int status)
     {
         frames_status[frame_number] = status;
         return frame_number_bits;
+    }
+    return NULL;
+}
+
+int *get_first_free_frame()
+{
+    if (get_number_of_free_frames() == 0)
+    {
+        return NULL;
+    }
+    int i = 0;
+    for (; i < NUMBER_OF_FRAMES; i++)
+    {
+        if (frames_status[i] == NOT_PRESENT)
+        {
+            break;
+        }
+    }
+    if (i < NUMBER_OF_FRAMES)
+    {
+        return get_bits_from_decimal(i, FRAME_NUMBER_LEN);
     }
     return NULL;
 }
@@ -153,4 +175,36 @@ int count_mapped_pages(PAGES_TABLE *table)
         count += table->pages[i].present;
     }
     return count;
+}
+
+PAGES_TABLE *map_page(PAGES_TABLE *table, PAGE *page)
+{
+    if (page == NULL)
+    {
+        return NULL;
+    }
+    int *frame_number_bits = get_first_free_frame();
+    if (frame_number_bits == NULL)
+    {
+        return NULL;
+    }
+    mark_frame(frame_number_bits, PRESENT);
+    page->frame_number = frame_number_bits;
+    page->modified = NOT_MODIFIED;
+    page->present = PRESENT;
+    page->referenced = 0;
+    insert_page(page);
+    return table;
+}
+
+PAGES_TABLE *map_pages_set(PAGES_TABLE *table, PAGE *pages_set, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (map_page(table, &pages_set[i]) == NULL)
+        {
+            return NULL;
+        }
+    }
+    return table;
 }

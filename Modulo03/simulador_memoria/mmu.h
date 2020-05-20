@@ -92,7 +92,6 @@ int get_global_instruction_counter(void);
  * Este contador é utilizado quando o algortimo LRU está habilitado.
  */
 void inc_global_instruction_counter(void);
-
 /**
  * retorna a quantidade de quadros de página atualmente em uso, isto é, atrelados a alguma página virtual.
  * Se o vetor de status for NULL, ele será automaticamente inicializado.
@@ -103,6 +102,12 @@ int get_number_of_used_frames(void);
  * Se o vetor de status for NULL, ele será automaticamente inicializado.
  */
 int get_number_of_free_frames(void);
+/**
+ * retorna o número (vetor de bits) do primeiro quadro de páginas livre.
+ * O tamanho do vetor é constante e representado por FRAME_NUMBER_LEN.
+ * Se não existirem quadros livres, NULL será retornado.
+ */
+int *get_first_free_frame(void);
 /**
  * apenas aloca a memória para o vetor frames_status e marca todas as posições como NOT_PRESENT.
  */
@@ -119,6 +124,25 @@ int *mark_frame(int *, int);
  * cria uma nova tabela de páginas para um processo e a retorna.
  */
 PAGES_TABLE *create_and_assign_pages_table(void);
+/**
+ * realiza o mapeamento de uma página virtual em um quadro de página disponível.
+ * A própria função determina qual o quadro apropriado para alocação da página virtual.
+ * A função já realiza a alteração necessária no mapa de páginas local e global.
+ * Se existir algum quadro disponível e a alocação ocorrer bem, o ponteiro para a tabela de páginas informada
+ * será retornado (!= NULL).
+ * Se NULL for retornado, não foi possível mapear a página informada.
+ */
+PAGES_TABLE *map_page(PAGES_TABLE *, PAGE *);
+/**
+ * realiza o mapeamento de um conjunto de páginas virtuais em quadros de páginas disponíveis.
+ * A própria função determina quais quadros são apropriados para alocação.
+ * A função já realiza a alteração necessária no mapa de páginas local e global.
+ * O último parâmetro informa qual o tamanho do conjunto de páginas informado.
+ * Se existir a quantidade de quadros disponíveis e a alocação ocorrer bem, o ponteiro para a tabela de páginas informada
+ * será retornado (!= NULL).
+ * Se NULL for retornado, não foi possível mapear as páginas informadas.
+ */
+PAGES_TABLE *map_pages_set(PAGES_TABLE *, PAGE *, int);
 /**
  * converte um dado endereço virtual em seu correspondente endereço físico com base na tabela de páginas atual.
  * O char representa se é uma operação de escrita ou leitura sobre o endereço solicitado.
