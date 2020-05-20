@@ -5,7 +5,17 @@
  * retorna a quantidade de bits necessária para representar uma quantidade de memória em KB.
  */
 int get_bits_len(int);
-
+/**
+ * define qual a porcentagem da imagem do processo deve ser enviada para a memória principal no 
+ * momento de criação ou no momento de 'wake up'.
+ * -- Um double para a porcentagem.
+ */
+#define ALLOCATION_PERCENT 0.15
+/**
+ * retorna qual o número de quadros de página que devem ser reservados para o processo com base no 
+ * tamanho da imagem do processo informado como parâmetro.
+ */
+int allocation_policy(int);
 /**
  * define o tamanho da página virtual em KB (e.g., 4 KB).
  */
