@@ -14,6 +14,9 @@ int get_bits_len(int);
 /**
  * retorna qual o número de quadros de página que devem ser reservados para o processo com base no 
  * tamanho da imagem do processo informado como parâmetro.
+ * A função garante que ao menos 1 frame será reservado ao processo.
+ * A função garante que não mais do que 50% da RAM será atribuída a um único processo de uma única vez.
+ * -- Os processos podem aumentar ou dinimuir a quantidade de RAM dinamicamente com o passar do tempo.
  */
 int allocation_policy(int);
 /**

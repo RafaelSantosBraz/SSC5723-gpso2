@@ -10,4 +10,4 @@ do
     fi
 done
 
-gcc ${var} -o main.out -lm
+gcc -O3 ${var} -o main.out -lm
