@@ -121,6 +121,12 @@ void initialize_frames(void);
  */
 int *mark_frame(int *, int);
 /**
+ * retorna o número (vetor de bits) da primeira página virtual ativa (está mapeada).
+ * O tamanho do vetor é constante e representado por PAGE_NUMBER_LEN.
+ * Se não existirem páginas mapeadas, NULL será retornado.
+ */
+int *get_first_present_page(PAGES_TABLE *);
+/**
  * cria uma nova tabela de páginas para um processo e a retorna.
  */
 PAGES_TABLE *create_and_assign_pages_table(void);

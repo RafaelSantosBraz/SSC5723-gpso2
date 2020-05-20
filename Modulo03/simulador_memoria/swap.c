@@ -49,6 +49,9 @@ int *get_page_in_disc(PROCESS_SWAP_AREA *swap_area, int *page_number_bits)
     int page_number = get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN);
     if (page_number >= swap_area->first_address->decimal && page_number <= swap_area->last_address->decimal)
     {
+        printf("Página '%d' (%s) foi buscada no disco.\n",
+               page_number,
+               get_bits_string_from_bits(page_number_bits, PAGE_NUMBER_LEN));
         return page_number_bits;
     }
     else

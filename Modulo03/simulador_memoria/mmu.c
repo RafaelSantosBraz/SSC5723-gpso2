@@ -199,6 +199,10 @@ PAGES_TABLE *map_page(PAGES_TABLE *table, PAGE *page)
 
 PAGES_TABLE *map_pages_set(PAGES_TABLE *table, PAGE *pages_set, int size)
 {
+    if (size > get_number_of_free_frames())
+    {
+        return NULL;
+    }
     for (int i = 0; i < size; i++)
     {
         if (map_page(table, &pages_set[i]) == NULL)
@@ -207,4 +211,16 @@ PAGES_TABLE *map_pages_set(PAGES_TABLE *table, PAGE *pages_set, int size)
         }
     }
     return table;
+}
+
+int *get_first_present_page(PAGES_TABLE *table)
+{
+    for (int i = 0; i < NUMBER_OF_PAGES; i++)
+    {
+        if (table->pages[i].present == PRESENT)
+        {
+            return get_bits_from_decimal(i, PAGE_NUMBER_LEN);
+        }
+    }
+    return NULL;
 }
