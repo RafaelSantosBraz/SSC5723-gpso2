@@ -170,6 +170,86 @@ PROCESS *go_to_sleep(PROCESS *process)
 PROCESS *wake_up(PROCESS *process)
 {
     printf("Acordando o Processo '%s'...\n", process->process_ID);
-    // implementação aqui.
+    int frames = allocation_policy(process->image_size);
+    int free_frames = get_number_of_free_frames();
+    if (frames <= free_frames)
+    {
+        int mapped_pages_number = count_mapped_pages(process->pages_table);
+        if (mapped_pages_number > free_frames)
+        {
+            mapped_pages_number = free_frames;
+        }
+        PAGE **mapped_pages = malloc(sizeof(PAGE *) * mapped_pages_number);
+        for (int i = 0; i < mapped_pages_number; i++)
+        {
+            int *page_number_bits = get_first_present_page(process->pages_table);
+            if (get_page_in_disc(process->swap_area, page_number_bits) == NULL)
+            {
+                return NULL;
+            }
+            PAGE *page_address = &process->pages_table->pages[get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN)];
+            if (map_page(process->pages_table,
+                         page_address) == NULL)
+            {
+                return NULL;
+            }
+            mapped_pages[i] = page_address;
+        }
+        unmap_whole_pages_table(process->pages_table);
+        for (int i = 0; i < mapped_pages_number; i++)
+        {
+            mapped_pages[i]->present = PRESENT;
+        }
+        if (mapped_pages_number < free_frames)
+        {
+            int count = frames - mapped_pages_number;
+            for (int i = mapped_pages_number; i <= process->swap_area->last_address->decimal; i++)
+            {
+                if (count-- >= 0)
+                {
+                    int *page_number_bits = get_bits_from_decimal(i, PAGE_NUMBER_LEN);
+                    if (get_page_in_disc(process->swap_area, page_number_bits) == NULL)
+                    {
+                        return NULL;
+                    }
+                    if (map_page(process->pages_table,
+                                 &process->pages_table->pages[get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN)]) == NULL)
+                    {
+                        return NULL;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
+    else
+    {
+        // liberar espaço na RAM
+        if (force_sleep_for_space(frames) == 0)
+        {
+            return NULL;
+        }
+        // chamada recursiva, mas sempre será executado apenas mais uma vez.
+        return wake_up(process);
+    }
+    process->status = IN_RAM;
     return process;
+}
+
+int force_sleep_for_space(int size)
+{
+    int free_space = get_number_of_free_frames();
+    while (free_space < size)
+    {
+        PROCESS *chosen = choose_process_to_sleep();
+        if ((go_to_sleep(chosen)) == NULL)
+        {
+            return 0;
+        }
+        free_space = get_number_of_free_frames();
+    }
+    return 1;
 }

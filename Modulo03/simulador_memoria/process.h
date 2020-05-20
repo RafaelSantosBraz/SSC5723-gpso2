@@ -75,4 +75,14 @@ PROCESS *go_to_sleep(PROCESS *);
  * Se NULL for retornado, não foi possível acordar o processo e a situação deve ser tratada.
  */
 PROCESS *wake_up(PROCESS *);
+/**
+ * abre espaço na meória principal para entrada de um novo processo (ou wake up) quando a quantidade de quadros livres
+ * não é suficiente para manter a política de alocação.
+ * A função força os processo IN_RAM a irem para a SWAP.
+ * A quantidade de processos que terão que dormir depende de quantos quadros devem ser liberados, este valor é o parâmetro 
+ * da função.
+ * Se tudo ocorrer bem, 1 será retornado.
+ * Se algo de errado ocorrer, 0 será retornado.
+ */
+int force_sleep_for_space(int);
 #endif
