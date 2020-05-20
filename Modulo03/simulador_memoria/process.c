@@ -150,16 +150,16 @@ PROCESS *go_to_sleep(PROCESS *process)
         }
     }
     int number_mapped = count_mapped_pages(process->pages_table);
-    PAGE *mapped_pages = malloc(sizeof(PAGE) * number_mapped);
+    PAGE **mapped_pages = malloc(sizeof(PAGE*) * number_mapped);
     int count = 0;
     for (int i = 0; i < NUMBER_OF_PAGES; i++)
     {
         if (process->pages_table->pages[i].present == PRESENT)
         {
-            mapped_pages[count++] = process->pages_table->pages[i];
+            mapped_pages[count++] = &process->pages_table->pages[i];
         }
     }
-    if (remove_set_of_pages(mapped_pages, number_mapped) == NULL)
+    if (remove_set_of_pages(mapped_pages[0], number_mapped) == NULL)
     {
         return NULL;
     }
