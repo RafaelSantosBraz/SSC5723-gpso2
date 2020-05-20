@@ -150,6 +150,11 @@ PAGES_TABLE *map_page(PAGES_TABLE *, PAGE *);
  */
 PAGES_TABLE *map_pages_set(PAGES_TABLE *, PAGE *, int);
 /**
+ * marca todas as páginas da tabela de páginas informada como NOT_PRESENT.
+ * OBS: a função não realiza qualquer alteração que não seja trocar o bit 'present' do conjunto de páginas informado. 
+ */
+void unmap_whole_pages_table(PAGES_TABLE *);
+/**
  * converte um dado endereço virtual em seu correspondente endereço físico com base na tabela de páginas atual.
  * O char representa se é uma operação de escrita ou leitura sobre o endereço solicitado.
  * -- Usar as tags R ou W já existentes.

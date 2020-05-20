@@ -224,3 +224,11 @@ int *get_first_present_page(PAGES_TABLE *table)
     }
     return NULL;
 }
+
+void unmap_whole_pages_table(PAGES_TABLE *table)
+{
+    for (int i = 0; i < NUMBER_OF_PAGES; i++)
+    {
+        table->pages[i].present = NOT_PRESENT;
+    }
+}
