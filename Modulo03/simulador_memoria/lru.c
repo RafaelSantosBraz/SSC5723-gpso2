@@ -1,6 +1,7 @@
 #include "lru.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * representa o encapsulamento da página real para a lista do LRU.
@@ -89,7 +90,7 @@ int insert_element_LRU(LRU_PAGE_ELEMENT *element)
     LRU_PAGE_ELEMENT *previous = NULL;
     while (current != NULL)
     {
-        if (current->page->referenced < element->page->referenced)
+        if (current->page->referenced <= element->page->referenced)
         {
             break;
         }
@@ -104,10 +105,10 @@ int insert_element_LRU(LRU_PAGE_ELEMENT *element)
     if (previous == NULL)
     {
         element->next = global_list_LRU->start;
-        global_list_LRU->start = element;
+        global_list_LRU->start = element;        
         return 1;
     }
-    element->next = previous->next;
+    element->next = current;
     previous->next = element;
     return 1;
 }
