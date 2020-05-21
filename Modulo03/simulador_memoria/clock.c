@@ -182,21 +182,14 @@ int *remove_best_page_CLOCK()
     //A primeira página da lista sempre será a mais antiga, pois as inserções são feitas no final
     CLOCK_PAGE_ELEMENT *current = global_list_CLOCK->end->next;
     int *frame_number; 
-    int find = 0;
 
-    while (!find)
+    // Procura página com bit R igual à 0 e remove da lista
+    while (current->page->referenced != 0)
     {
-        if (current->page->referenced == 0)
-        {
-            find = 1;
-        }
-        else
-        {
-            current->page->referenced = 0;
-            current = current->next;
-        }
+        current->page->referenced = 0;
+        current = current->next;
     }
-    
+
     frame_number = current->page->frame_number;
     if (remove_page_CLOCK(current) == NULL)
     {
