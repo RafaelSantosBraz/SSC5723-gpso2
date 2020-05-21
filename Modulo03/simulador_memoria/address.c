@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include "config.h"
 
 ADDRESS *get_address_from_decimal(unsigned long long decimal, int bits_size)
 {
@@ -58,4 +59,9 @@ char *get_bits_string_from_bits(int *bits, int size)
     }
     formated[size] = '\0';
     return formated;
+}
+
+char *get_bits_string_from_decimal(int decimal, int size)
+{
+    return get_bits_string_from_bits(get_bits_from_decimal(decimal, get_bits_len(size)), get_bits_len(size));
 }

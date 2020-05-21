@@ -52,4 +52,9 @@ char *get_bits_string_address(ADDRESS *);
  * Usado para exibição.
  */
 char *get_bits_string_from_bits(int *, int);
+/**
+ * retorna um vetor de char que representa um vetor de bits para um decimal informado.
+ * O último parâmetro é responsável por indicar o tamanho do vetor de bits a ser gerado.
+ */
+char *get_bits_string_from_decimal(int, int);
 #endif

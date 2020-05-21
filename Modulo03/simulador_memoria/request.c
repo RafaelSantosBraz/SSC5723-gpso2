@@ -26,7 +26,7 @@ void receive_request(REQUEST *request)
         printf("Processo '%s' solicitando E/S para o dispositivo '%d' (%s)...\n",
                request->process_ID,
                request->number,
-               get_bits_string_from_bits(get_bits_from_decimal(request->number, get_bits_len(1)), get_bits_len(1)));
+               get_bits_string_from_decimal(request->number, 1));
         printf("Solicitação de E/S realizada!\n");
         break;
     }
@@ -72,7 +72,7 @@ void receive_request(REQUEST *request)
             process->status = -1;
             break;
         }
-        printf("Processo '%s' criado completamente.\n", process->process_ID);        
+        printf("Processo '%s' criado completamente.\n", process->process_ID);
         break;
     }
     }
