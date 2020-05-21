@@ -44,7 +44,7 @@ int insert_element_LRU(LRU_PAGE_ELEMENT *);
  * O último parâmetro é utilizado para retorno da função e indica qual é o elemento antecessor do elemento encontrado.
  * Retorna NULL se a página não existir na lista global.
  */
-LRU_PAGE_ELEMENT *find_element(PAGE *, LRU_PAGE_ELEMENT *);
+LRU_PAGE_ELEMENT *find_element(PAGE *, LRU_PAGE_ELEMENT **);
 
 int insert_element_LRU(LRU_PAGE_ELEMENT *element)
 {
@@ -61,7 +61,7 @@ int insert_element_LRU(LRU_PAGE_ELEMENT *element)
     {
         global_list_LRU->start = element;
         return 1;
-    }    
+    }
     current->next = element;
     return 1;
 }
@@ -71,7 +71,7 @@ PAGE *remove_set_of_pages_LRU(PAGE *pages_set, int size)
     for (int i = 0; i < size; i++)
     {
         if (remove_page_LRU(&pages_set[i]) == NULL)
-        {            
+        {
             return NULL;
         }
     }
@@ -80,8 +80,9 @@ PAGE *remove_set_of_pages_LRU(PAGE *pages_set, int size)
 
 PAGE *remove_page_LRU(PAGE *page)
 {
-    LRU_PAGE_ELEMENT *previous = NULL;
+    LRU_PAGE_ELEMENT **previous = malloc(sizeof(LRU_PAGE_ELEMENT *));
     LRU_PAGE_ELEMENT *element = find_element(page, previous);
+    printf("%p %p\n", element, previous);
     if (element == NULL)
     {
         return NULL;
@@ -92,15 +93,15 @@ PAGE *remove_page_LRU(PAGE *page)
     }
     else
     {
-        previous->next = element->next;
+        (*previous)->next = element->next;
     }
     free(element);
     return page;
 }
 
-LRU_PAGE_ELEMENT *find_element(PAGE *page, LRU_PAGE_ELEMENT *previous)
+LRU_PAGE_ELEMENT *find_element(PAGE *page, LRU_PAGE_ELEMENT **previous)
 {
-    previous = NULL;
+    *previous = NULL;
     LRU_PAGE_ELEMENT *current = global_list_LRU->start;
     while (current != NULL)
     {
@@ -108,7 +109,7 @@ LRU_PAGE_ELEMENT *find_element(PAGE *page, LRU_PAGE_ELEMENT *previous)
         {
             return current;
         }
-        previous = current;
+        *previous = current;
         current = current->next;
     }
     return NULL;
