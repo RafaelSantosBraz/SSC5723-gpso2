@@ -39,14 +39,14 @@ CLOCK_PAGES_LIST *global_list_CLOCK = NULL;
  * O último parâmetro é utilizado para retorno da função e indica qual é o elemento antecessor do elemento encontrado.
  * Retorna NULL se a página não existe na lista global.
  */
-CLOCK_PAGE_ELEMENT *find_element(PAGE *, CLOCK_PAGE_ELEMENT *);
+CLOCK_PAGE_ELEMENT *find_element_CLOCK(PAGE *, CLOCK_PAGE_ELEMENT *);
 
 /** 
  * Função auxiliar para checar se a lista está vazia
 */
 int list_empty();
 
-void initialize_global_list_LRU()
+void initialize_global_list_CLOCK()
 {
     global_list_CLOCK = malloc(sizeof(CLOCK_PAGE_ELEMENT));
     global_list_CLOCK->end = NULL;
@@ -78,7 +78,7 @@ PAGE *insert_page_CLOCK(PAGE *page)
 PAGE *remove_page_CLOCK(PAGE *page)
 {
     CLOCK_PAGE_ELEMENT *previous = NULL;
-    CLOCK_PAGE_ELEMENT *element = find_element(page, previous);
+    CLOCK_PAGE_ELEMENT *element = find_element_CLOCK(page, previous);
     if (element == NULL)
     {
         return NULL;
@@ -102,7 +102,7 @@ PAGE *remove_page_CLOCK(PAGE *page)
     return page;
 }
 
-CLOCK_PAGE_ELEMENT *find_element(PAGE *page, CLOCK_PAGE_ELEMENT *previous)
+CLOCK_PAGE_ELEMENT *find_element_CLOCK(PAGE *page, CLOCK_PAGE_ELEMENT *previous)
 {
     previous = NULL;
     CLOCK_PAGE_ELEMENT *current = global_list_CLOCK->end->next;
