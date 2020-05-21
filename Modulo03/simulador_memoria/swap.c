@@ -47,7 +47,7 @@ int *get_page_in_disc(PROCESS_SWAP_AREA *swap_area, int *page_number_bits)
         return NULL;
     }
     int page_number = get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN);
-    if (page_number >= swap_area->first_address->decimal && page_number <= swap_area->last_address->decimal)
+    if (page_number >= 0 && page_number <= ((swap_area->last_address->decimal + 1) / 1024) - 1)
     {
         printf("Página '%d' (%s) foi buscada no disco.\n",
                page_number,
@@ -66,7 +66,7 @@ int *get_page_in_disc(PROCESS_SWAP_AREA *swap_area, int *page_number_bits)
 PAGE *send_page_to_disc(PROCESS_SWAP_AREA *swap_area, PAGE *virtual_page, int *page_number_bits)
 {
     int page_number = get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN);
-    if (page_number >= swap_area->first_address->decimal && page_number <= swap_area->last_address->decimal)
+    if (page_number >= 0 && page_number <= ((swap_area->last_address->decimal + 1) / 1024) - 1)
     {
         printf("A página '%d' (%s) foi enviada para o disco.\n",
                page_number,
