@@ -176,3 +176,32 @@ int get_number_mapped_pages_CLOCK()
 
     return count;
 }
+
+int *remove_best_page_CLOCK()
+{
+    //A primeira página da lista sempre será a mais antiga, pois as inserções são feitas no final
+    CLOCK_PAGE_ELEMENT *current = global_list_CLOCK->end->next;
+    int *frame_number; 
+    int find = 0;
+
+    while (!find)
+    {
+        if (current->page->referenced == 0)
+        {
+            find = 1;
+        }
+        else
+        {
+            current->page->referenced = 0;
+            current = current->next;
+        }
+    }
+    
+    frame_number = current->page->frame_number;
+    if (remove_page_CLOCK(current) == NULL)
+    {
+        return NULL;
+    }
+    
+    return frame_number;
+}
