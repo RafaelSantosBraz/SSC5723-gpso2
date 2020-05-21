@@ -15,6 +15,9 @@ void receive_request(REQUEST *request)
 {
     // incrementa o número de instruções executadas até o momento.
     inc_global_instruction_counter();
+    if (request->process_ID == NULL){
+        return;
+    }
     switch (request->op)
     {
     case P:
@@ -72,7 +75,7 @@ void receive_request(REQUEST *request)
             else
             {
                 receive_request(request);
-                break;
+                return;
             }
             break;
         }
@@ -97,12 +100,140 @@ void receive_request(REQUEST *request)
     }
     case R:
     {
-
+        printf("Processo '%s' solicitando leitura em '%d' (%s)...\n",
+               request->process_ID,
+               request->number,
+               get_bits_string_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE));
+        PROCESS *process = find_process(request->process_ID);
+        if (process == NULL)
+        {
+            printf("Erro: Processo '%s' não existe!\n", request->process_ID);
+            break;
+        }
+        if (process->status == IN_DISC)
+        {
+            if (wake_up(process) == NULL)
+            {
+                printf("Erro: Processo '%s' não pode ser acordado!\n", request->process_ID);
+                break;
+            }
+        }
+        int **page_number_bits = malloc(sizeof(int *));
+        ADDRESS *physical_address = map_to_physical_address(get_address_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
+                                                            process->pages_table, request->op, page_number_bits);
+        if (physical_address == NULL && (*page_number_bits) == NULL)
+        {
+            break;
+        }
+        if (physical_address == NULL && (*page_number_bits) != NULL)
+        {
+            int *frame_number_bits = NULL;
+            if (get_number_of_free_frames() > 0)
+            {
+                frame_number_bits = get_first_free_frame();
+            }
+            else
+            {
+                frame_number_bits = remove_best_page();
+            }
+            if (frame_number_bits == NULL)
+            {
+                printf("Error: não foi possível substituir uma página virtual!\n");
+                break;
+            }
+            if (get_page_in_disc(process->swap_area, (*page_number_bits)) == NULL)
+            {
+                break;
+            }
+            if (map_page(process->pages_table, &process->pages_table->pages[get_decimal_from_bits((*page_number_bits), PAGE_NUMBER_LEN)]) == NULL)
+            {
+                printf("Erro: não foi possível mapear a página!\n");
+                break;
+            }
+            else
+            {
+                receive_request(request);
+                return;
+            }
+            break;
+        }
+        printf("Processo '%s' leu em '%d' (%s) \n\tno endereço físico '%lld' (%s) \n\tna quadro de página '%lld' (%s).\n",
+               request->process_ID,
+               request->number,
+               get_bits_string_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
+               physical_address->decimal,
+               get_bits_string_address(physical_address),
+               physical_address->decimal / 1024 / FRAME_SIZE,
+               get_bits_string_from_decimal(physical_address->decimal / 1024 / FRAME_SIZE, FRAME_NUMBER_LEN));
         break;
     }
     case W:
     {
-
+        printf("Processo '%s' solicitando escrita em '%d' (%s)...\n",
+               request->process_ID,
+               request->number,
+               get_bits_string_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE));
+        PROCESS *process = find_process(request->process_ID);
+        if (process == NULL)
+        {
+            printf("Erro: Processo '%s' não existe!\n", request->process_ID);
+            break;
+        }
+        if (process->status == IN_DISC)
+        {
+            if (wake_up(process) == NULL)
+            {
+                printf("Erro: Processo '%s' não pode ser acordado!\n", request->process_ID);
+                break;
+            }
+        }
+        int **page_number_bits = malloc(sizeof(int *));
+        ADDRESS *physical_address = map_to_physical_address(get_address_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
+                                                            process->pages_table, request->op, page_number_bits);
+        if (physical_address == NULL && (*page_number_bits) == NULL)
+        {
+            break;
+        }
+        if (physical_address == NULL && (*page_number_bits) != NULL)
+        {
+            int *frame_number_bits = NULL;
+            if (get_number_of_free_frames() > 0)
+            {
+                frame_number_bits = get_first_free_frame();
+            }
+            else
+            {
+                frame_number_bits = remove_best_page();
+            }
+            if (frame_number_bits == NULL)
+            {
+                printf("Error: não foi possível substituir uma página virtual!\n");
+                break;
+            }
+            if (get_page_in_disc(process->swap_area, (*page_number_bits)) == NULL)
+            {
+                break;
+            }
+            if (map_page(process->pages_table, &process->pages_table->pages[get_decimal_from_bits((*page_number_bits), PAGE_NUMBER_LEN)]) == NULL)
+            {
+                printf("Erro: não foi possível mapear a página!\n");
+                break;
+            }
+            else
+            {
+                receive_request(request);
+                return;
+            }
+            break;
+        }
+        printf("Processo '%s' escreveu em '%d' (%s) \n\tno endereço físico '%lld' (%s) \n\tna quadro de página '%lld' (%s).\n",
+               request->process_ID,
+               request->number,
+               get_bits_string_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
+               physical_address->decimal,
+               get_bits_string_address(physical_address),
+               physical_address->decimal / 1024 / FRAME_SIZE,
+               get_bits_string_from_decimal(physical_address->decimal / 1024 / FRAME_SIZE, FRAME_NUMBER_LEN));
         break;
     }
     case C:
@@ -146,7 +277,7 @@ void receive_request(REQUEST *request)
 
 void print_situation()
 {
-    printf("--------------------------------------------\n");
+    printf("\n--------------------------------------------\n");
     printf("Resumo da situação atual do simulador.\n");
     print_process_situation();
     print_RAM_situation();
