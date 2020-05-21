@@ -18,7 +18,7 @@ void receive_request(REQUEST *request)
     switch (request->op)
     {
     case P:
-    {        
+    {
         printf("Processo '%s' solicitando a execução da instrução - operando - '%d' (%s)...\n",
                request->process_ID,
                request->number,
@@ -38,15 +38,23 @@ void receive_request(REQUEST *request)
             }
         }
         int **page_number_bits = malloc(sizeof(int *));
-        ADDRESS *virtual_address = map_to_physical_address(get_address_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
-                                                           process->pages_table, request->op, page_number_bits);
-        if (virtual_address == NULL && (*page_number_bits) == NULL)
+        ADDRESS *physical_address = map_to_physical_address(get_address_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
+                                                            process->pages_table, request->op, page_number_bits);
+        if (physical_address == NULL && (*page_number_bits) == NULL)
         {
             break;
         }
-        if (virtual_address == NULL && (*page_number_bits) != NULL)
+        if (physical_address == NULL && (*page_number_bits) != NULL)
         {
-            int *frame_number_bits = remove_best_page();
+            int *frame_number_bits = NULL;
+            if (get_number_of_free_frames() > 0)
+            {
+                frame_number_bits = get_first_free_frame();
+            }
+            else
+            {
+                frame_number_bits = remove_best_page();
+            }
             if (frame_number_bits == NULL)
             {
                 printf("Error: não foi possível substituir uma página virtual!\n");
@@ -68,12 +76,14 @@ void receive_request(REQUEST *request)
             }
             break;
         }
-        printf("Processo '%s' executou a instrução - operando - '%d' (%s) no endereço físico '%lld' (%s).\n",
+        printf("Processo '%s' executou a instrução - operando - '%d' (%s) \n\tno endereço físico '%lld' (%s) \n\tna quadro de página '%lld' (%s).\n",
                request->process_ID,
                request->number,
                get_bits_string_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
-               virtual_address->decimal,
-               get_bits_string_address(virtual_address));
+               physical_address->decimal,
+               get_bits_string_address(physical_address),
+               physical_address->decimal / 1024 / FRAME_SIZE,
+               get_bits_string_from_decimal(physical_address->decimal / 1024 / FRAME_SIZE, FRAME_NUMBER_LEN));
         break;
     }
     case I:
