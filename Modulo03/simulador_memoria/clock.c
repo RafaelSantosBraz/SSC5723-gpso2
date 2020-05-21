@@ -39,7 +39,7 @@ CLOCK_PAGES_LIST *global_list_CLOCK = NULL;
  * O último parâmetro é utilizado para retorno da função e indica qual é o elemento antecessor do elemento encontrado.
  * Retorna NULL se a página não existe na lista global.
  */
-CLOCK_PAGE_ELEMENT *find_element_CLOCK(PAGE *, CLOCK_PAGE_ELEMENT *);
+CLOCK_PAGE_ELEMENT *find_element_CLOCK(PAGE *, CLOCK_PAGE_ELEMENT **);
 
 /** 
  * Função auxiliar para checar se a lista está vazia
@@ -77,20 +77,20 @@ PAGE *insert_page_CLOCK(PAGE *page)
 
 PAGE *remove_page_CLOCK(PAGE *page)
 {
-    CLOCK_PAGE_ELEMENT *previous = NULL;
+    CLOCK_PAGE_ELEMENT **previous = malloc(sizeof(CLOCK_PAGE_ELEMENT *));
     CLOCK_PAGE_ELEMENT *element = find_element_CLOCK(page, previous);
     if (element == NULL)
     {
         return NULL;
     }
 
-    if (previous == NULL) //Se elemento for o primeiro da lista
+    if (*previous == NULL) //Se elemento for o primeiro da lista
     {
         global_list_CLOCK->end->next = element->next;
     }
     else
     {
-        previous->next = element->next;
+        (*previous)->next = element->next;
     }
 
     if (element == element->next) //Se element for o único elemento da lista
@@ -102,9 +102,9 @@ PAGE *remove_page_CLOCK(PAGE *page)
     return page;
 }
 
-CLOCK_PAGE_ELEMENT *find_element_CLOCK(PAGE *page, CLOCK_PAGE_ELEMENT *previous)
+CLOCK_PAGE_ELEMENT *find_element_CLOCK(PAGE *page, CLOCK_PAGE_ELEMENT **previous)
 {
-    previous = NULL;
+    *previous = NULL;
     CLOCK_PAGE_ELEMENT *current = global_list_CLOCK->end->next;
 
     //Se lista estiver vazia
@@ -119,7 +119,7 @@ CLOCK_PAGE_ELEMENT *find_element_CLOCK(PAGE *page, CLOCK_PAGE_ELEMENT *previous)
         {
             return current;
         }
-        previous = current;
+        *previous = current;
         current = current->next;
     } while (current != global_list_CLOCK->end->next);
 
