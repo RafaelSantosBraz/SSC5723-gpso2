@@ -191,7 +191,7 @@ int *remove_best_page_CLOCK()
     }
 
     frame_number = current->page->frame_number;
-    if (remove_page_CLOCK(current) == NULL)
+    if (remove_page_CLOCK(current->page) == NULL)
     {
         return NULL;
     }
