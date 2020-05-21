@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "process.h"
 #include "inter_alg.h"
+#include <stdlib.h>
 
 /**
  * função auxiliar que imprime a situação atual do simulador:
@@ -18,7 +19,61 @@ void receive_request(REQUEST *request)
     {
     case P:
     {
-
+        printf("Processo '%s' solicitando a execução da instrução - operando - '%d' (%s)...\n",
+               request->process_ID,
+               request->number,
+               get_bits_string_from_decimal(request->number, PAGE_NUMBER_LEN));
+        PROCESS *process = find_process(request->process_ID);
+        if (process == NULL)
+        {
+            printf("Erro: Processo '%s' não existe!\n", request->process_ID);
+            break;
+        }
+        if (process->status == IN_DISC)
+        {
+            if (wake_up(process) == NULL)
+            {
+                printf("Erro: Processo '%s' não pode ser acordado!\n", request->process_ID);
+                break;
+            }
+        }
+        int **page_number_bits = malloc(sizeof(int *));
+        ADDRESS *virtual_address = map_to_physical_address(get_address_from_decimal(request->number, PAGE_NUMBER_LEN),
+                                                           process->pages_table, request->op, page_number_bits);
+        if (virtual_address == NULL && (*page_number_bits) == NULL)
+        {
+            break;
+        }
+        if (virtual_address == NULL && (*page_number_bits) != NULL)
+        {
+            int *frame_number_bits = remove_best_page();
+            if (frame_number_bits == NULL)
+            {
+                printf("Error: não foi possível substituir uma página virtual!\n");
+                break;
+            }
+            if (get_page_in_disc(process->swap_area, (*page_number_bits)) == NULL)
+            {
+                break;
+            }
+            if (map_page(process->pages_table, &process->pages_table->pages[get_decimal_from_bits((*page_number_bits), PAGE_NUMBER_LEN)]) == NULL)
+            {
+                printf("Erro: não foi possível mapear a página!\n");
+                break;
+            }
+            else
+            {
+                receive_request(request);
+                break;
+            }
+            break;
+        }
+        printf("Processo '%s' executou a instrução - operando - '%d' (%s) no endereço físico '%lld' (%s).\n",
+               request->process_ID,
+               request->number,
+               get_bits_string_from_decimal(request->number, PAGE_NUMBER_LEN),
+               virtual_address->decimal,
+               get_bits_string_address(virtual_address));
         break;
     }
     case I:

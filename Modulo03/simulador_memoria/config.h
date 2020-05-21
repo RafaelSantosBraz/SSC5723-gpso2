@@ -65,6 +65,6 @@ int allocation_policy(int);
 /**
  * marca qual algoritmo de substituição de páginas está sendo aplicado no simulador.
  */
-#define CURRENT_METHOD CLOCK
+#define CURRENT_METHOD LRU
 
 #endif
