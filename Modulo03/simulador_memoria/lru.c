@@ -82,18 +82,17 @@ PAGE *remove_page_LRU(PAGE *page)
 {
     LRU_PAGE_ELEMENT **previous = malloc(sizeof(LRU_PAGE_ELEMENT *));
     LRU_PAGE_ELEMENT *element = find_element(page, previous);
-    printf("%p %p\n", element, previous);
     if (element == NULL)
     {
         return NULL;
     }
-    if (previous == NULL)
+    if (*previous == NULL)
     {
         global_list_LRU->start = element->next;
     }
     else
     {
-        (*previous)->next = element->next;
+        (*previous)->next = element->next;        
     }
     free(element);
     return page;
