@@ -51,5 +51,12 @@ void initialize_global_list(void);
  * Se NULL for retornado, não foi possível desmapear alguma página e o erro deve ser tratado.
  */
 int *remove_best_page(void);
-
+/**
+ * retorna a quantidade de páginas que estão na lista global de páginas no momento.
+ */
+int get_number_mapped_pages(void);
+/**
+ * exibe quantas páginas virtuais estão mapeadas na lista global de páginas atualmente.
+ */
+void print_global_page_situation(void);
 #endif

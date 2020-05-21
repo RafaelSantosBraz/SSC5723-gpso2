@@ -2,6 +2,7 @@
 
 #include "lru.h"
 #include "clock.h"
+#include <stdio.h>
 
 PAGE *remove_set_of_pages(PAGE *pages_set, int size)
 {
@@ -70,6 +71,23 @@ int *remove_best_page()
     {
     case LRU:
         return remove_best_page_LRU();
+    case CLOCK:
+        // return função_implementada_em_CLOCK();
+        break;
+    }
+}
+
+void print_global_page_situation()
+{
+    printf("Quantidade de páginas virtuais na lista global: %d\n", get_number_mapped_pages());
+}
+
+int get_number_mapped_pages()
+{
+    switch (CURRENT_METHOD)
+    {
+    case LRU:
+        return get_number_mapped_pages_LRU();
     case CLOCK:
         // return função_implementada_em_CLOCK();
         break;

@@ -85,4 +85,8 @@ PROCESS *wake_up(PROCESS *);
  * Se algo de errado ocorrer, 0 será retornado.
  */
 int force_sleep_for_space(int);
+/**
+ * exibe quantos processos existem atualmente.
+ */
+void print_process_situation(void);
 #endif

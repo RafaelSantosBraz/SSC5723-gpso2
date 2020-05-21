@@ -169,4 +169,8 @@ ADDRESS *map_to_physical_address(ADDRESS *, PAGES_TABLE *, char, int *);
  * Páginas ativas são aquelas que levam para um quadro de página válido na memória principal.
  */
 int count_mapped_pages(PAGES_TABLE *);
+/**
+ * exibe a quantidade de quadros de páginas utilizados no momento.
+ */
+void print_RAM_situation(void);
 #endif

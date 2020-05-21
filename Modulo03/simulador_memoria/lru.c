@@ -227,3 +227,15 @@ int *remove_best_page_LRU()
     has_to_update = 1;
     return frame_number;
 }
+
+int get_number_mapped_pages_LRU()
+{
+    LRU_PAGE_ELEMENT *current = global_list_LRU->start;
+    int count = 0;
+    while (current != NULL)
+    {
+        count++;
+        current = current->next;
+    }
+    return count;
+}

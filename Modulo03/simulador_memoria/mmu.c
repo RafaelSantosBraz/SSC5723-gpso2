@@ -232,3 +232,8 @@ void unmap_whole_pages_table(PAGES_TABLE *table)
         table->pages[i].present = NOT_PRESENT;
     }
 }
+
+void print_RAM_situation()
+{
+    printf("Utilização dos quadros de página: %d/%d\n", get_number_of_used_frames(), NUMBER_OF_FRAMES);
+}

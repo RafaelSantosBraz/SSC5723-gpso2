@@ -66,4 +66,8 @@ PAGES_TABLE *send_whole_pages_table_to_disc(PROCESS_SWAP_AREA *, PAGES_TABLE *);
  * Se o valor NULL for retornado, alguma(s) das páginas estão inconsistentes.
  */
 int **get_pages_set_in_disc(PROCESS_SWAP_AREA *, int **, int);
+/**
+ * exibe a quantidade de memória sendo usada na SWAP.
+ */
+void print_SWAP_situation(void);
 #endif

@@ -52,4 +52,8 @@ void initialize_global_list_LRU(void);
  * Se NULL for retornado, não foi possível desmapear alguma página e o erro deve ser tratado.
  */
 int *remove_best_page_LRU(void);
+/**
+ * retorna a quantidade de páginas que estão na lista global de páginas no momento.
+ */
+int get_number_mapped_pages_LRU(void);
 #endif

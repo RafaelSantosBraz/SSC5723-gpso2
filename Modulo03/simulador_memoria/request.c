@@ -2,6 +2,13 @@
 
 #include <stdio.h>
 #include "process.h"
+#include "inter_alg.h"
+
+/**
+ * função auxiliar que imprime a situação atual do simulador:
+ * Processos, RAM, tabela de páginas global e SWAP.
+ */
+void print_situation(void);
 
 void receive_request(REQUEST *request)
 {
@@ -60,7 +67,19 @@ void receive_request(REQUEST *request)
             break;
         }
         printf("Processo '%s' criado completamente.\n", process->process_ID);
+        print_situation();
         break;
     }
     }
+}
+
+void print_situation()
+{
+    printf("--------------------------------------------\n");
+    printf("Resumo da situação atual do simulador.\n");
+    print_process_situation();
+    print_RAM_situation();
+    print_global_page_situation();
+    print_SWAP_situation();
+    printf("--------------------------------------------\n");
 }

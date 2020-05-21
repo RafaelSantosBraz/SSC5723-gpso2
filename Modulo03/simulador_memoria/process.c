@@ -88,6 +88,7 @@ PROCESS_IN_LIST *find_last()
         {
             break;
         }
+        current = current->next;
     }
     return current;
 }
@@ -150,7 +151,7 @@ PROCESS *go_to_sleep(PROCESS *process)
         }
     }
     int number_mapped = count_mapped_pages(process->pages_table);
-    PAGE **mapped_pages = malloc(sizeof(PAGE*) * number_mapped);
+    PAGE **mapped_pages = malloc(sizeof(PAGE *) * number_mapped);
     int count = 0;
     for (int i = 0; i < NUMBER_OF_PAGES; i++)
     {
@@ -252,4 +253,25 @@ int force_sleep_for_space(int size)
         free_space = get_number_of_free_frames();
     }
     return 1;
+}
+
+void print_process_situation()
+{
+    PROCESS_IN_LIST *current = process_table->start;
+    int process_count = 0;
+    int active = 0;
+    while (current != NULL)
+    {
+        if (current->process->process_ID != NULL && strcmp(current->process->process_ID, "") != 0)
+        {
+            process_count++;
+            if (current->process->status == IN_RAM)
+            {
+                active++;
+            }
+        }
+        current = current->next;
+    }
+    printf("Quantidade de Processos existentes: %d\n", process_count);
+    printf("Quantidade de Processos ativos na RAM: %d\n", active);
 }
