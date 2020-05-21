@@ -18,11 +18,11 @@ void receive_request(REQUEST *request)
     switch (request->op)
     {
     case P:
-    {
+    {        
         printf("Processo '%s' solicitando a execução da instrução - operando - '%d' (%s)...\n",
                request->process_ID,
                request->number,
-               get_bits_string_from_decimal(request->number, PAGE_NUMBER_LEN));
+               get_bits_string_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE));
         PROCESS *process = find_process(request->process_ID);
         if (process == NULL)
         {
@@ -38,7 +38,7 @@ void receive_request(REQUEST *request)
             }
         }
         int **page_number_bits = malloc(sizeof(int *));
-        ADDRESS *virtual_address = map_to_physical_address(get_address_from_decimal(request->number, PAGE_NUMBER_LEN),
+        ADDRESS *virtual_address = map_to_physical_address(get_address_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
                                                            process->pages_table, request->op, page_number_bits);
         if (virtual_address == NULL && (*page_number_bits) == NULL)
         {
@@ -71,7 +71,7 @@ void receive_request(REQUEST *request)
         printf("Processo '%s' executou a instrução - operando - '%d' (%s) no endereço físico '%lld' (%s).\n",
                request->process_ID,
                request->number,
-               get_bits_string_from_decimal(request->number, PAGE_NUMBER_LEN),
+               get_bits_string_from_decimal(request->number, VIRTUAL_ADDRESS_SIZE),
                virtual_address->decimal,
                get_bits_string_address(virtual_address));
         break;
@@ -81,7 +81,7 @@ void receive_request(REQUEST *request)
         printf("Processo '%s' solicitando E/S para o dispositivo '%d' (%s)...\n",
                request->process_ID,
                request->number,
-               get_bits_string_from_decimal(request->number, 1));
+               get_bits_string_from_decimal(request->number, get_bits_len(1)));
         printf("Solicitação de E/S realizada!\n");
         break;
     }

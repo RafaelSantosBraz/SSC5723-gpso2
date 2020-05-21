@@ -6,6 +6,10 @@
  */
 int get_bits_len(int);
 /**
+ * retorna a quantidade de bits necessária para representar um determinado valor decimal.
+ */
+int get_bits_len_decimal(int);
+/**
  * define qual a porcentagem da imagem do processo deve ser enviada para a memória principal no 
  * momento de criação ou no momento de 'wake up'.
  * -- Um double para a porcentagem.

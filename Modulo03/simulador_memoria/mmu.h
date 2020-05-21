@@ -31,11 +31,11 @@
 /**
  * indica quantos bits são necessários para representar o número do quadro de página.
  */
-#define FRAME_NUMBER_LEN get_bits_len(NUMBER_OF_FRAMES)
+#define FRAME_NUMBER_LEN get_bits_len_decimal(NUMBER_OF_FRAMES)
 /**
  * indica quantos bits são necessários para representar o número da página.
  */
-#define PAGE_NUMBER_LEN get_bits_len(NUMBER_OF_PAGES)
+#define PAGE_NUMBER_LEN get_bits_len_decimal(NUMBER_OF_PAGES)
 
 /**
  * representa a estrutura de uma página.

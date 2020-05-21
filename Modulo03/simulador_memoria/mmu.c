@@ -118,6 +118,7 @@ ADDRESS *map_to_physical_address(ADDRESS *virtual_address, PAGES_TABLE *table, c
         (*page_number_bits)[i] = virtual_address->bits[i];
     }
     int page_number = get_decimal_from_bits((*page_number_bits), PAGE_NUMBER_LEN);
+    printf("%d %d %d %d\n", PAGE_NUMBER_LEN, VIRTUAL_ADDRESS_SIZE, FRAME_NUMBER_LEN, PHYSICAL_ADDRESS_SIZE);
     if (page_number >= 0 && page_number < NUMBER_OF_PAGES)
     {
         if (table->pages[page_number].present == PRESENT)
