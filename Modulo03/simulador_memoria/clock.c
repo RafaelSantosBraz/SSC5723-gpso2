@@ -1,7 +1,5 @@
 #include "clock.h"
 
-#include "clock.h"
-
 #include <stdlib.h>
 
 /**
