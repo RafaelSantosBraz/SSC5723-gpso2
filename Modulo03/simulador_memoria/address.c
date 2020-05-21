@@ -63,5 +63,5 @@ char *get_bits_string_from_bits(int *bits, int size)
 
 char *get_bits_string_from_decimal(int decimal, int size)
 {
-    return get_bits_string_from_bits(get_bits_from_decimal(decimal, get_bits_len(size)), get_bits_len(size));
+    return get_bits_string_from_bits(get_bits_from_decimal(decimal, size), size);
 }
