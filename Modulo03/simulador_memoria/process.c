@@ -169,7 +169,7 @@ PROCESS *go_to_sleep(PROCESS *process)
 
 PROCESS *wake_up(PROCESS *process)
 {
-    printf("Acordando o Processo '%s'...\n", process->process_ID);
+    printf("Levando Processo '%s' para a RAM...\n", process->process_ID);
     int frames = allocation_policy(process->image_size);
     int free_frames = get_number_of_free_frames();
     if (frames <= free_frames)
@@ -203,9 +203,9 @@ PROCESS *wake_up(PROCESS *process)
         if (mapped_pages_number < free_frames)
         {
             int count = frames - mapped_pages_number;
-            for (int i = mapped_pages_number; i <= process->swap_area->last_address->decimal; i++)
+            for (int i = mapped_pages_number; i <= process->image_size / VIRTUAL_PAGE_SIZE; i++)
             {
-                if (count-- >= 0)
+                if (count-- > 0)
                 {
                     int *page_number_bits = get_bits_from_decimal(i, PAGE_NUMBER_LEN);
                     if (get_page_in_disc(process->swap_area, page_number_bits) == NULL)

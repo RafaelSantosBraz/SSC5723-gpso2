@@ -10,7 +10,7 @@ int get_bits_len(int size)
 
 int allocation_policy(int image)
 {
-    int frames = floor(image * ALLOCATION_PERCENT);
+    int frames = floor((image / VIRTUAL_PAGE_SIZE) * ALLOCATION_PERCENT);
     if (frames == 0)
     {
         frames = 1;
