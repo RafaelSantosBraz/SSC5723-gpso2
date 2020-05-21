@@ -163,7 +163,7 @@ void unmap_whole_pages_table(PAGES_TABLE *);
  * Se o valor NULL for retornado e o último parâmetro for diferente de NULL, significa que ocorreu uma falta de página que precisa ser tratada.
  * Se o valor NULL for retornado e o último parâmetro também for NULL, significa que um erro ocorreu se segmentação que deve ser tratado.
  */
-ADDRESS *map_to_physical_address(ADDRESS *, PAGES_TABLE *, char, int *);
+ADDRESS *map_to_physical_address(ADDRESS *, PAGES_TABLE *, char, int **);
 /**
  * retorna a quantidade de páginas ativas na tabela de páginas informada.
  * Páginas ativas são aquelas que levam para um quadro de página válido na memória principal.
