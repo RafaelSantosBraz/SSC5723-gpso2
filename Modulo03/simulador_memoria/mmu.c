@@ -118,7 +118,6 @@ ADDRESS *map_to_physical_address(ADDRESS *virtual_address, PAGES_TABLE *table, c
         (*page_number_bits)[i] = virtual_address->bits[i];
     }
     int page_number = get_decimal_from_bits((*page_number_bits), PAGE_NUMBER_LEN);
-    printf("%d %d %d %d\n", PAGE_NUMBER_LEN, VIRTUAL_ADDRESS_SIZE, FRAME_NUMBER_LEN, PHYSICAL_ADDRESS_SIZE);
     if (page_number >= 0 && page_number < NUMBER_OF_PAGES)
     {
         if (table->pages[page_number].present == PRESENT)
@@ -130,9 +129,10 @@ ADDRESS *map_to_physical_address(ADDRESS *virtual_address, PAGES_TABLE *table, c
                 physical_bits[i] = table->pages[page_number].frame_number[i];
             }
             // copia o valor do deslocamento.
+            int mov = PAGE_NUMBER_LEN;
             for (int i = FRAME_NUMBER_LEN; i < PHYSICAL_ADDRESS_SIZE; i++)
             {
-                physical_bits[i] = virtual_address->bits[i];
+                physical_bits[i] = virtual_address->bits[mov++];
             }
             physical_address = get_address_from_bits(physical_bits, PHYSICAL_ADDRESS_SIZE);
             // sempre marca como referenciada, nesse caso.
