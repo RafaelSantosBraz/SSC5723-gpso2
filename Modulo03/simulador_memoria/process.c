@@ -212,23 +212,28 @@ PROCESS *wake_up(PROCESS *process)
         for (int i = 0; i < mapped_pages_number; i++)
         {
             int *page_number_bits = get_first_present_page(process->pages_table);
+            PAGE *page_address = &process->pages_table->pages[get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN)];
+            process->pages_table->pages[get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN)].present = NOT_PRESENT;
             if (get_page_in_disc(process->swap_area, page_number_bits) == NULL)
             {
                 return NULL;
             }
-            PAGE *page_address = &process->pages_table->pages[get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN)];
+            mapped_pages[i] = page_address;
+        }
+        for (int i = 0; i < mapped_pages_number; i++)
+        {
             if (map_page(process->pages_table,
-                         page_address) == NULL)
+                         mapped_pages[i]) == NULL)
             {
                 return NULL;
             }
-            mapped_pages[i] = page_address;
         }
         unmap_whole_pages_table(process->pages_table);
         for (int i = 0; i < mapped_pages_number; i++)
         {
             mapped_pages[i]->present = PRESENT;
         }
+        free(mapped_pages);
         if (mapped_pages_number < free_frames)
         {
             int count = frames - mapped_pages_number;
