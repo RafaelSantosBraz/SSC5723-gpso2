@@ -24,8 +24,11 @@ void read_input_file()
     }
     while (fgets(line, LINE_MAX, file) != NULL)
     {
-        printf("\n%s\n",line);
-        *strstr(line, "\n") = '\0';
+        printf("\n%s\n", line);
+        if (strstr(line, "\n") != NULL)
+        {
+            *strstr(line, "\n") = '\0';
+        }
         int count = 0, number;
         char *process_ID = NULL, *ptr, op;
         ptr = strtok(line, " ()\r");
