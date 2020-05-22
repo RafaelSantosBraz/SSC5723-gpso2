@@ -2,13 +2,15 @@
 
 #include <math.h>
 #include "mmu.h"
+#include <stdio.h>
 
 int get_bits_len(int size)
 {
     return ((floor(log(size * 1024) / log(2)) + 1));
 }
 
-int get_bits_len_decimal(int size){
+int get_bits_len_decimal(int size)
+{
     return ((floor(log(size) / log(2)) + 1));
 };
 
@@ -23,6 +25,10 @@ int allocation_policy(int image)
     if (frames > max_frames)
     {
         frames = max_frames;
+    }
+    if (frames == 0)
+    {
+        frames = 1;
     }
     return frames;
 }
