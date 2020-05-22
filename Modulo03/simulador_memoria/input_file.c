@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "request.h"
+#include <ctype.h>
 
 /**
  * indica o tamanho máximo do buffer de memória para cada linha do arquivo.
@@ -24,36 +25,39 @@ void read_input_file()
     }
     while (fgets(line, LINE_MAX, file) != NULL)
     {
-        printf("\n%s\n", line);
-        if (strstr(line, "\n") != NULL)
+        if (isalpha(line[0]))
         {
-            *strstr(line, "\n") = '\0';
-        }
-        int count = 0, number;
-        char *process_ID = NULL, *ptr, op;
-        ptr = strtok(line, " ()\r");
-        while (ptr != NULL)
-        {
-            switch (count)
+            printf("\n%s\n", line);
+            if (strstr(line, "\n") != NULL)
             {
-            case 0:
-                process_ID = malloc(strlen(ptr) * sizeof(char) + 1);
-                strcpy(process_ID, ptr);
-                break;
-            case 1:
-                op = ptr[0];
-                break;
-            case 2:
-                number = atoi(ptr);
-                break;
+                *strstr(line, "\n") = '\0';
             }
-            count++;
-            ptr = strtok(NULL, " ()\r");
+            int count = 0, number;
+            char *process_ID = NULL, *ptr, op;
+            ptr = strtok(line, " ()\r");
+            while (ptr != NULL)
+            {
+                switch (count)
+                {
+                case 0:
+                    process_ID = malloc(strlen(ptr) * sizeof(char) + 1);
+                    strcpy(process_ID, ptr);
+                    break;
+                case 1:
+                    op = ptr[0];
+                    break;
+                case 2:
+                    number = atoi(ptr);
+                    break;
+                }
+                count++;
+                ptr = strtok(NULL, " ()\r");
+            }
+            REQUEST *request = malloc(sizeof(REQUEST));
+            request->process_ID = process_ID;
+            request->op = op;
+            request->number = number;
+            receive_request(request);
         }
-        REQUEST *request = malloc(sizeof(REQUEST));
-        request->process_ID = process_ID;
-        request->op = op;
-        request->number = number;
-        receive_request(request);
     }
 }
