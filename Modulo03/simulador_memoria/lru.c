@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <limits.h>
+#include "swap.h"
+#include "process.h"
 
 /**
  * representa o encapsulamento da página real para a lista do LRU.
@@ -92,8 +94,23 @@ PAGE *remove_page_LRU(PAGE *page)
     }
     else
     {
-        (*previous)->next = element->next;        
+        (*previous)->next = element->next;
     }
+    if (page->modified == MODIFIED)
+    {
+        if ((send_page_to_disc_from_only_page(page) == 0))
+        {
+            return NULL;
+        }
+    }
+    mark_frame(page->frame_number, NOT_PRESENT);
+    page->present = NOT_PRESENT;
+    int *page_number_bits = get_page_number_from_page(page);
+    PROCESS *process = find_process_from_page(page);
+    printf("Página '%lld' (%s) do Processo '%s' removida da lista global de páginas.\n",
+           get_decimal_from_bits(page_number_bits, PAGE_NUMBER_LEN),
+           get_bits_string_from_bits(page_number_bits, PAGE_NUMBER_LEN),
+           process->process_ID);
     free(element);
     return page;
 }

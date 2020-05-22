@@ -94,4 +94,17 @@ int force_sleep_for_space(int);
  * exibe quantos processos existem atualmente.
  */
 void print_process_situation(void);
+/**
+ * responsável por enviar uma página modificada para o disco.
+ * Esta função é utilizada quando ocorre a necessidade uma uma substituição de página e é chamada pelo LRU e CLOCK.
+ * Esta função deve ser chamada apenas quando sabe-se a página, mas não quem é o processo e a área de troca para ela.
+ * Retorna 0 ou 1.
+ */
+int send_page_to_disc_from_only_page(PAGE*);
+/**
+ * retorna quem é processo dono de uma dada página.
+ * NULL indica que esta página não pertence a nenhum processo.
+ */
+PROCESS *find_process_from_page(PAGE *);
+
 #endif

@@ -178,4 +178,10 @@ int count_mapped_pages(PAGES_TABLE *);
  * exibe a quantidade de quadros de páginas utilizados no momento.
  */
 void print_RAM_situation(void);
+/**
+ * retorna o número da página na tabela local de páginas do processo dono dela.
+ * O retorno é um vetor de bits de tamanho constante representado por PAGE_NUMBER_LEN.
+ * Retorno NULL indica que a página não foi encontrada.
+ */
+int *get_page_number_from_page(PAGE *);
 #endif

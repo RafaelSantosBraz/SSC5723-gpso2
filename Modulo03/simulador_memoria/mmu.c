@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "request.h"
 #include "inter_alg.h"
+#include "process.h"
 
 /**
  * vetor que marca, para cada quadro de página, se ele está atualmente atrelado a alguma página virtual,
@@ -240,7 +241,7 @@ void free_pages_table(PAGES_TABLE *table)
     if (table != NULL && table->pages != NULL)
     {
         for (int i = 0; i < NUMBER_OF_PAGES; i++)
-        {            
+        {
             if (table->pages[i].present == PRESENT)
             {
                 if (remove_page(&table->pages[i]) == NULL)
@@ -260,4 +261,22 @@ void free_pages_table(PAGES_TABLE *table)
 void print_RAM_situation()
 {
     printf("Utilização dos quadros de página: %d/%d\n", get_number_of_used_frames(), NUMBER_OF_FRAMES);
+}
+
+int *get_page_number_from_page(PAGE *page)
+{
+    PROCESS *process = find_process_from_page(page);
+    if (process == NULL)
+    {
+        return NULL;
+    }
+    int i = 0;
+    for (; i < NUMBER_OF_PAGES; i++)
+    {
+        if (&process->pages_table->pages[i] == page)
+        {
+            break;
+        }
+    }
+    return get_bits_from_decimal(i, PAGE_NUMBER_LEN);
 }

@@ -113,6 +113,27 @@ PROCESS *find_process(char *process_ID)
     return the_process;
 }
 
+PROCESS *find_process_from_page(PAGE *page)
+{
+    PROCESS_IN_LIST *current = process_table->start;
+    PROCESS *the_process = NULL;
+    while (current != NULL)
+    {
+        if (current->process->process_ID != NULL && strcmp(current->process->process_ID, "") != 0)
+        {
+            for (int i = 0; i < NUMBER_OF_PAGES; i++)
+            {
+                if (&current->process->pages_table->pages[i] == page)
+                {
+                    return current->process;
+                }
+            }
+        }
+        current = current->next;
+    }
+    return NULL;
+}
+
 PROCESS *choose_process_to_sleep(void)
 {
     PROCESS_IN_LIST *current = process_table->start;
@@ -318,4 +339,26 @@ void remove_process(PROCESS *process)
         free(current->process);
         free(current);
     }
+}
+
+int send_page_to_disc_from_only_page(PAGE *page)
+{
+    PROCESS *process = find_process_from_page(page);
+    if (process == NULL)
+    {
+        return 0;
+    }
+    int i = 0;
+    for (; i < NUMBER_OF_PAGES; i++)
+    {
+        if (&process->pages_table->pages[i] == page)
+        {
+            break;
+        }
+    }
+    if (send_page_to_disc(process->swap_area, page, get_bits_from_decimal(i, PAGE_NUMBER_LEN)) == NULL)
+    {
+        return 0;
+    }
+    return 1;
 }
