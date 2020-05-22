@@ -185,9 +185,12 @@ PROCESS *go_to_sleep(PROCESS *process)
             mapped_pages[count++] = &process->pages_table->pages[i];
         }
     }
-    if (remove_set_of_pages(mapped_pages[0], number_mapped) == NULL)
+    for (int i = 0; i < number_mapped; i++)
     {
-        return NULL;
+        if (remove_page(mapped_pages[i]) == NULL)
+        {
+            return NULL;
+        }
     }
     process->status = IN_DISC;
     return process;
