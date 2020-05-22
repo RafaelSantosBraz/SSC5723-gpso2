@@ -263,7 +263,7 @@ void receive_request(REQUEST *request)
             reset_process(process);
             break;
         }
-        if (process->image_size > NUMBER_OF_PAGES)
+        if (process->image_size > VIRTUAL_MEM_SIZE)
         {
             printf("Não é possível criar o processo '%s'! Imagem maior do que a memória virtual.\n", process->process_ID);
             reset_process(process);
