@@ -99,7 +99,7 @@ PROCESS *find_process(char *process_ID)
     PROCESS *the_process = NULL;
     while (current != NULL)
     {
-        if (strcmp(process_ID, current->process->process_ID) == 0)
+        if (current->process->process_ID != NULL && strcmp(process_ID, current->process->process_ID) == 0)
         {
             the_process = current->process;
             break;

@@ -15,7 +15,8 @@ void receive_request(REQUEST *request)
 {
     // incrementa o número de instruções executadas até o momento.
     inc_global_instruction_counter();
-    if (request->process_ID == NULL){
+    if (request->process_ID == NULL)
+    {
         return;
     }
     switch (request->op)
@@ -95,6 +96,12 @@ void receive_request(REQUEST *request)
                request->process_ID,
                request->number,
                get_bits_string_from_decimal(request->number, get_bits_len(1)));
+        PROCESS *process = find_process(request->process_ID);
+        if (process == NULL)
+        {
+            printf("Erro: Processo '%s' não existe!\n", request->process_ID);
+            break;
+        }
         printf("Solicitação de E/S realizada!\n");
         break;
     }
