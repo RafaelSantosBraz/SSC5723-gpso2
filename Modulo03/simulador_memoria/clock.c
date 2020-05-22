@@ -109,9 +109,8 @@ PAGE *remove_page_CLOCK(PAGE *page)
             return NULL;
         }
     }
-        
+
     mark_frame(page->frame_number, NOT_PRESENT);
-    page->present = NOT_PRESENT;
     int *page_number_bits = get_page_number_from_page(page);
     PROCESS *process = find_process_from_page(page);
     printf("Página '%lld' (%s) do Processo '%s' removida da lista global de páginas.\n",
@@ -211,6 +210,7 @@ int *remove_best_page_CLOCK()
     }
 
     frame_number = current->page->frame_number;
+    current->page->present = NOT_PRESENT;
     if (remove_page_CLOCK(current->page) == NULL)
     {
         return NULL;
