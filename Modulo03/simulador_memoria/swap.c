@@ -127,5 +127,5 @@ int **get_pages_set_in_disc(PROCESS_SWAP_AREA *swap_area, int **pages_set, int s
 
 void print_SWAP_situation()
 {
-    printf("Quantidade de memória usada na SWAP: %d\n", get_used_swap());
+    printf("Quantidade de memória usada na SWAP: %d/%d\n", get_used_swap(), SECUNDARY_MEM_MAX_SIZE);
 }
