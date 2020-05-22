@@ -253,16 +253,20 @@ void receive_request(REQUEST *request)
         if (process->swap_area == NULL)
         {
             printf("Não é possível criar o processo '%s'! Erro na SWAP.\n", process->process_ID);
-            process->process_ID = NULL;
-            process->status = -1;
+            reset_process(process);
             break;
         }
         process->pages_table = create_and_assign_pages_table();
         if (process->pages_table == NULL)
         {
             printf("Não é possível criar o processo '%s'! Erro na tabela de páginas.\n", process->process_ID);
-            process->process_ID = NULL;
-            process->status = -1;
+            reset_process(process);
+            break;
+        }
+        if (process->image_size > NUMBER_OF_PAGES)
+        {
+            printf("Não é possível criar o processo '%s'! Imagem maior do que a memória virtual.\n", process->process_ID);
+            reset_process(process);
             break;
         }
         // o processo ainda não foi enviado para a RAM.
@@ -271,8 +275,7 @@ void receive_request(REQUEST *request)
         if (wake_up(process) == NULL)
         {
             printf("Não é possível criar o processo '%s' na RAM!\n", process->process_ID);
-            process->process_ID = NULL;
-            process->status = -1;
+            reset_process(process);
             break;
         }
         printf("Processo '%s' criado completamente.\n", process->process_ID);

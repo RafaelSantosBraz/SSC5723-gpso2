@@ -234,6 +234,29 @@ void unmap_whole_pages_table(PAGES_TABLE *table)
     }
 }
 
+void free_pages_table(PAGES_TABLE *table)
+{
+    printf("Liberando tabela de páginas...\n");
+    if (table != NULL && table->pages != NULL)
+    {
+        for (int i = 0; i < NUMBER_OF_PAGES; i++)
+        {
+            if (table->pages[i].present = PRESENT)
+            {                
+                if (remove_page(&table->pages[i]) == NULL)
+                {
+                    printf("Não foi possível remover a página '%d' (%s) da tabela global de páginas.\n",
+                           i,
+                           get_bits_string_from_decimal(i, PAGE_NUMBER_LEN));
+                }
+                mark_frame(table->pages[i].frame_number, NOT_PRESENT);
+            }
+        }
+        free(table->pages);
+        free(table);
+    }
+}
+
 void print_RAM_situation()
 {
     printf("Utilização dos quadros de página: %d/%d\n", get_number_of_used_frames(), NUMBER_OF_FRAMES);

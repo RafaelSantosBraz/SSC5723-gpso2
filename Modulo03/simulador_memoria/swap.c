@@ -26,6 +26,7 @@ PROCESS_SWAP_AREA *create_process_swap_area(int image_size)
         {
             printf("O processo não pode ser alocado na área de troca! Tamanho do processo maior do que o permitido para endereçamento.\n");
             swap_area = NULL;
+            current_used_swap -= image_size;
         }
         else
         {
@@ -35,6 +36,7 @@ PROCESS_SWAP_AREA *create_process_swap_area(int image_size)
     else
     {
         printf("O processo não pode ser alocado na área de troca! Sem espaço suficiente na área de troca.\n");
+        current_used_swap -= image_size;
     }
     return swap_area;
 }
@@ -123,6 +125,18 @@ int **get_pages_set_in_disc(PROCESS_SWAP_AREA *swap_area, int **pages_set, int s
         }
     }
     return pages_set;
+}
+
+void free_swap_area(PROCESS_SWAP_AREA *swap_area, int size)
+{
+    printf("Liberando área de troca em disco...\n");
+    if (swap_area != NULL)
+    {
+        current_used_swap -= size;
+        free(swap_area->first_address);
+        free(swap_area->last_address);
+        free(swap_area);
+    }
 }
 
 void print_SWAP_situation()

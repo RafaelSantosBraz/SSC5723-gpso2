@@ -30,6 +30,11 @@ int get_used_swap(void);
  */
 PROCESS_SWAP_AREA *create_process_swap_area(int);
 /**
+ * libera a area da swap do processo.
+ * O último parâmetro indica a quantidade de memória a ser liberada da área de troca.
+ */
+void free_swap_area(PROCESS_SWAP_AREA *, int);
+/**
  * retorna a página solicita como um vetor de bits de seu número a partir da área de troca informada.
  * O último parâmetro é o vetor de bits que indica o número da página a ser buscado em disco.
  * O tamanho do vetor de bits informado e retornado é constante e é representado por PAGE_NUMBER_LEN.

@@ -131,6 +131,11 @@ int *get_first_present_page(PAGES_TABLE *);
  */
 PAGES_TABLE *create_and_assign_pages_table(void);
 /**
+ * libera a tabela de páginas de um processo.
+ * Se existirem páginas mapeadas, serão liberadas da tabela global também.
+ */
+void free_pages_table(PAGES_TABLE *);
+/**
  * realiza o mapeamento de uma página virtual em um quadro de página disponível.
  * A própria função determina qual o quadro apropriado para alocação da página virtual.
  * A função já realiza a alteração necessária no mapa de páginas local e global.

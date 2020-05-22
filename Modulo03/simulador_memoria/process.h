@@ -76,6 +76,11 @@ PROCESS *go_to_sleep(PROCESS *);
  */
 PROCESS *wake_up(PROCESS *);
 /**
+ * função utilizada para "matar" um processo.
+ * Utilizada especialmente quando um processo encontra um erro durante sua criação.
+ */
+void reset_process(PROCESS *);
+/**
  * abre espaço na meória principal para entrada de um novo processo (ou wake up) quando a quantidade de quadros livres
  * não é suficiente para manter a política de alocação.
  * A função força os processo IN_RAM a irem para a SWAP.

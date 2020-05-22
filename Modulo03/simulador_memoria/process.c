@@ -45,6 +45,10 @@ void initialize_list(void);
  * retorna o último elemento da tabela de processos (lista).
  */
 PROCESS_IN_LIST *find_last();
+/**
+ * exlui um dado processo da tabela de processos.
+ */
+void remove_process(PROCESS *);
 
 PROCESS *create_and_assign_process()
 {
@@ -274,4 +278,44 @@ void print_process_situation()
     }
     printf("Quantidade de Processos existentes: %d\n", process_count);
     printf("Quantidade de Processos ativos na RAM: %d\n", active);
+}
+
+void reset_process(PROCESS *process)
+{
+    if (process != NULL)
+    {
+        printf("Excluindo processo...\n");
+        free_swap_area(process->swap_area, process->image_size);
+        free_pages_table(process->pages_table);
+        remove_process(process);
+    }
+}
+
+void remove_process(PROCESS *process)
+{
+    PROCESS_IN_LIST *current = process_table->start;
+    PROCESS_IN_LIST *previous = NULL;
+    while (current != NULL)
+    {
+        if (current->process->process_ID != NULL && strcmp(process->process_ID, current->process->process_ID) == 0)
+        {
+            current->process;
+            break;
+        }
+        previous = current;
+        current = current->next;
+    }
+    if (current != NULL)
+    {
+        if (previous == NULL)
+        {
+            process_table->start = current->next;
+        }
+        else
+        {
+            previous->next = current->next;
+        }
+        free(current->process);
+        free(current);
+    }
 }
