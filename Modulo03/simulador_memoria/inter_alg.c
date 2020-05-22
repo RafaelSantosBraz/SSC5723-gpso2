@@ -12,7 +12,6 @@ PAGE *remove_set_of_pages(PAGE *pages_set, int size)
         return remove_set_of_pages_LRU(pages_set, size);
     case CLOCK:
         return remove_set_of_pages_CLOCK(pages_set, size);
-        break;
     }
 }
 
@@ -24,7 +23,6 @@ PAGE *remove_page(PAGE *page)
         return remove_page_LRU(page);
     case CLOCK:
         return remove_page_CLOCK(page);
-        break;
     }
 }
 
@@ -36,7 +34,6 @@ PAGE *insert_set_of_pages(PAGE *pages_set, int size)
         return insert_set_of_pages_LRU(pages_set, size);
     case CLOCK:
         return insert_set_of_pages_CLOCK(pages_set, size);
-        break;
     }
 }
 
@@ -48,7 +45,6 @@ PAGE *insert_page(PAGE *page)
         return insert_page_LRU(page);
     case CLOCK:
         return insert_page_CLOCK(page);
-        break;
     }
 }
 
@@ -73,7 +69,6 @@ int *remove_best_page()
         return remove_best_page_LRU();
     case CLOCK:
         return remove_best_page_CLOCK();
-        break;
     }
 }
 
@@ -90,6 +85,5 @@ int get_number_mapped_pages()
         return get_number_mapped_pages_LRU();
     case CLOCK:
         return get_number_mapped_pages_CLOCK();
-        break;
     }
 }

@@ -240,9 +240,9 @@ void free_pages_table(PAGES_TABLE *table)
     if (table != NULL && table->pages != NULL)
     {
         for (int i = 0; i < NUMBER_OF_PAGES; i++)
-        {
-            if (table->pages[i].present = PRESENT)
-            {                
+        {            
+            if (table->pages[i].present == PRESENT)
+            {
                 if (remove_page(&table->pages[i]) == NULL)
                 {
                     printf("Não foi possível remover a página '%d' (%s) da tabela global de páginas.\n",
