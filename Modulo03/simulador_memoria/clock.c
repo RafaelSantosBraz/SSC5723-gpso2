@@ -16,7 +16,7 @@ typedef struct clock_page_element
      */
     PAGE *page;
     /**
-     * ponteiro para o próximo elemento da lista global do LRU.
+     * ponteiro para o próximo elemento da lista global do CLOCK.
      */
     struct clock_page_element *next;
 } CLOCK_PAGE_ELEMENT;
