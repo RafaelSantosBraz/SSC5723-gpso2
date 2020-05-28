@@ -36,7 +36,7 @@ int allocation_policy(int);
  * define o tamanho total da memória principal (e.g., 100 molduras de página). 
  * -- múltiplo dos frames.
  */
-#define RAM_SIZE (FRAME_SIZE * 100)
+#define RAM_SIZE (FRAME_SIZE * 6)
 /**
  * define o tamanho da área de troca (swap) da memória secundária (e.g., 1000 molduras de página). 
  * -- múltiplo dos frames.
@@ -69,6 +69,6 @@ int allocation_policy(int);
 /**
  * marca qual algoritmo de substituição de páginas está sendo aplicado no simulador.
  */
-#define CURRENT_METHOD CLOCK
+#define CURRENT_METHOD LRU
 
 #endif
