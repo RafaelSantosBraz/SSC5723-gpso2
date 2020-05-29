@@ -27,3 +27,4 @@ Exemplos de instruções aceitas:
 OBS: A instrução **P** não executa de fato uma outra instrução buscada na memória, mas apenas simboliza a busca por uma instrução armazenada na memória. O simulador possui E/S programada, portanto, a instrução **I** apenas simboliza o processo de espera pelo término de uma instrução de E/S.
 
 ## Arquitetura básica do sistema
+![](/Arquitetura.png)
