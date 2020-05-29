@@ -117,7 +117,14 @@ Para compilar os arquivos basta executar o arquivo [comp.sh](https://github.com/
   
  **Exemplos de execução**
  
- A sequência de instruçõe a seguir é um exemplo que aborda quase todas as políticas adotadas. Sua saída foi copiadas para o arquivo [ex1_out](). Neste exemplo, o algoritmo LRU foi usado para tratar a substituição de página.
+ Em todos os exemplos a seguir, a seguinte configuração foi utilizada:
+ 
+ * Tamanho das páginas/quadros: 4 Kbytes;
+ * Tamanho da memória principal (RAM): 6 quadros;
+ * Tamanho da área de troca (SWAP): 10000 molduras de página;
+ * Tamanho da memória virtual: 2000 páginas;
+ 
+ A sequência de instruçõe a seguir é um exemplo que aborda quase todas as políticas adotadas. Sua saída foi copiadas para o arquivo [ex1.txt](https://github.com/RafaelSantosBraz/SSC5723-gpso2/blob/master/Modulo03/examples/ex1.txt). Neste exemplo, o algoritmo LRU foi usado para tratar a substituição de página.
  
   ```
   P1 C 100
@@ -136,7 +143,7 @@ Para compilar os arquivos basta executar o arquivo [comp.sh](https://github.com/
   P3 R 6000000
   ```
  
-O próximo exemplo foi executado com os dois algoritmos de substituição. Em ambos, a página substituída foi a mesma, apesar dos métodos serem distintos ([resultado da execução]()).
+O próximo exemplo foi executado com os dois algoritmos de substituição. Em ambos, a página substituída foi a mesma, apesar dos métodos serem distintos ([resultado da execução](https://github.com/RafaelSantosBraz/SSC5723-gpso2/blob/master/Modulo03/examples/ex2.txt)).
   ```
   P1 C 100
   P2 C 100
@@ -148,7 +155,7 @@ O próximo exemplo foi executado com os dois algoritmos de substituição. Em am
   P2 P (12288)2
   ```
   
-Já no exemplo abaixo, a execução com os algoritmos LRU e CLOCK resultaram na remoção de páginas diferentes da memória ([resultado com LRU](), [resultado com CLOCK]()).
+Já no exemplo abaixo, a execução com os algoritmos LRU e CLOCK resultaram na remoção de páginas diferentes da memória ([resultado com LRU](https://github.com/RafaelSantosBraz/SSC5723-gpso2/blob/master/Modulo03/examples/ex3_LRU.txt), [resultado com CLOCK](https://github.com/RafaelSantosBraz/SSC5723-gpso2/blob/master/Modulo03/examples/ex3_CLOCK.txt)).
   ```
   P1 C 100
   P2 C 100
