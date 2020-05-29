@@ -3,7 +3,7 @@
 ## Simulador de memória virtual paginada
 
 Neste módulo, é implementado um simulador de gerenciamento de memória virtual paginada. O simulador recebe instruções referentes à execução de um programa, onde processos ativos podem solicitar instruções para execução das seguintes operações:
-* Criação de um processo (**C**) [link linha 25](https://github.com/RafaelSantosBraz/SSC5723-gpso2/edit/master/Modulo03/README#L25)
+* Criação de um processo (**C**)
 * Leitura em memória (**R**)
 * Escrita em memória (**W**)
 * Execução de instruções armazenadas na memória (**P**)
@@ -27,4 +27,5 @@ Exemplos de instruções aceitas:
 OBS: A instrução **P** não executa de fato uma outra instrução buscada na memória, mas apenas simboliza a busca por uma instrução armazenada na memória. O simulador possui E/S programada, portanto, a instrução **I** apenas simboliza o processo de espera pelo término de uma instrução de E/S.
 
 ## Arquitetura básica do sistema
-![](/Arquitetura.png)
+
+<img src="/Arquitetura.png">
