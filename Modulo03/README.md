@@ -1,7 +1,7 @@
 # Módulo 4
 
 Neste módulo, é implementado um simulador de gerenciamento de memória virtual paginada. O simulador recebe instruções referentes à execução de um programa, onde processos ativos podem solicitar instruções para execução das seguintes operações:
-* Criação de um processo (**C**) [link linha 25](/README#L18)
+* Criação de um processo (**C**) [link linha 25](https://github.com/RafaelSantosBraz/SSC5723-gpso2/edit/master/Modulo03/README#L25)
 * Leitura em memória (**R**)
 * Escrita em memória (**W**)
 * Execução de instruções armazenadas na memória (**P**)
