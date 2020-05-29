@@ -1,0 +1,180 @@
+--------------------------------------------
+Características do simulador.
+Método de substituição de páginas atual: Relógio
+Tamanho da página virtual e quadros de página: 4
+Tamanho max. da RAM (tamanho / N° quadros): 24/6
+Tamanho max. da memória virtual (tamanho / N° páginas): 8000/2000
+Tamanho max. da SWAP: 40000
+Tamanho do endereço virtual: 23
+Tamanho do endereço físico: 15
+--------------------------------------------
+
+P1 C 100
+
+Criando o Processo 'P1'...
+Processo 'P1' criado em disco.
+Levando Processo 'P1' para a RAM...
+Página '0' (00000000000) foi buscada no disco.
+Página '1' (00000000001) foi buscada no disco.
+Página '2' (00000000010) foi buscada no disco.
+Processo 'P1' criado completamente.
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 1
+Quantidade de Processos ativos na RAM: 1
+Utilização dos quadros de página: 3/6
+Quantidade de páginas virtuais na lista global: 3
+Quantidade de memória usada na SWAP: 100/40000
+--------------------------------------------
+
+P2 C 100
+
+Criando o Processo 'P2'...
+Processo 'P2' criado em disco.
+Levando Processo 'P2' para a RAM...
+Página '0' (00000000000) foi buscada no disco.
+Página '1' (00000000001) foi buscada no disco.
+Página '2' (00000000010) foi buscada no disco.
+Processo 'P2' criado completamente.
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
+
+P1 W (0)2
+
+Processo 'P1' solicitando escrita em '0' (00000000000000000000000)...
+Processo 'P1' escreveu em '0' (00000000000000000000000) 
+        no endereço físico '0' (000000000000000) 
+        na quadro de página '0' (000).
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
+
+P1 R (4096)2
+
+Processo 'P1' solicitando leitura em '4096' (00000000001000000000000)...
+Processo 'P1' leu em '4096' (00000000001000000000000) 
+        no endereço físico '4096' (001000000000000) 
+        na quadro de página '1' (001).
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
+
+P1 R (8192)2
+
+Processo 'P1' solicitando leitura em '8192' (00000000010000000000000)...
+Processo 'P1' leu em '8192' (00000000010000000000000) 
+        no endereço físico '8192' (010000000000000) 
+        na quadro de página '2' (010).
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
+
+P2  W (0)2
+
+Processo 'P2' solicitando escrita em '0' (00000000000000000000000)...
+Processo 'P2' escreveu em '0' (00000000000000000000000) 
+        no endereço físico '12288' (011000000000000) 
+        na quadro de página '3' (011).
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
+
+P2 R (4096)2
+
+Processo 'P2' solicitando leitura em '4096' (00000000001000000000000)...
+Processo 'P2' leu em '4096' (00000000001000000000000) 
+        no endereço físico '16384' (100000000000000) 
+        na quadro de página '4' (100).
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
+
+P2 R (8192)2
+
+Processo 'P2' solicitando leitura em '8192' (00000000010000000000000)...
+Processo 'P2' leu em '8192' (00000000010000000000000) 
+        no endereço físico '20480' (101000000000000) 
+        na quadro de página '5' (101).
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
+
+P1 W (0)2 
+
+Processo 'P1' solicitando escrita em '0' (00000000000000000000000)...
+Processo 'P1' escreveu em '0' (00000000000000000000000) 
+        no endereço físico '0' (000000000000000) 
+        na quadro de página '0' (000).
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
+
+P2 P (12288)2
+Processo 'P2' solicitando a execução da instrução - operando - '12288' (00000000011000000000000)...
+Falta de Página! Endereço Virtual '12288' (00000000011000000000000). Página N° '3'.
+A página '0' (00000000000) foi enviada para o disco.
+Página '0' (00000000000) do Processo 'P1' removida da lista global de páginas.
+Página '3' (00000000011) foi buscada no disco.
+Processo 'P2' solicitando a execução da instrução - operando - '12288' (00000000011000000000000)...
+Processo 'P2' executou a instrução - operando - '12288' (00000000011000000000000) 
+        no endereço físico '0' (000000000000000) 
+        na quadro de página '0' (000).
+
+--------------------------------------------
+Resumo da situação atual do simulador.
+Quantidade de Processos existentes: 2
+Quantidade de Processos ativos na RAM: 2
+Utilização dos quadros de página: 6/6
+Quantidade de páginas virtuais na lista global: 6
+Quantidade de memória usada na SWAP: 200/40000
+--------------------------------------------
