@@ -1,4 +1,4 @@
-# Módulo 4
+# Módulo 3
 
 ## Simulador de memória virtual paginada
 
