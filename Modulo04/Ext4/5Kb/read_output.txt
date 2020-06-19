@@ -1,70 +1,70 @@
 ---Execução 1---
 
-real	0m0,063s
-user	0m0,047s
-sys	0m0,016s
+real	0m0,001s
+user	0m0,001s
+sys	0m0,000s
 
 
 ---Execução 2---
 
-real	0m0,056s
-user	0m0,040s
-sys	0m0,016s
+real	0m0,001s
+user	0m0,001s
+sys	0m0,000s
 
 
 ---Execução 3---
 
-real	0m0,055s
-user	0m0,047s
-sys	0m0,008s
+real	0m0,001s
+user	0m0,001s
+sys	0m0,000s
 
 
 ---Execução 4---
 
-real	0m0,057s
-user	0m0,057s
+real	0m0,001s
+user	0m0,001s
 sys	0m0,000s
 
 
 ---Execução 5---
 
-real	0m0,060s
-user	0m0,060s
+real	0m0,001s
+user	0m0,001s
 sys	0m0,000s
 
 
 ---Execução 6---
 
-real	0m0,063s
-user	0m0,063s
+real	0m0,001s
+user	0m0,001s
 sys	0m0,000s
 
 
 ---Execução 7---
 
-real	0m0,055s
-user	0m0,051s
-sys	0m0,004s
+real	0m0,001s
+user	0m0,001s
+sys	0m0,000s
 
 
 ---Execução 8---
 
-real	0m0,055s
-user	0m0,051s
-sys	0m0,004s
+real	0m0,001s
+user	0m0,001s
+sys	0m0,000s
 
 
 ---Execução 9---
 
-real	0m0,055s
-user	0m0,051s
-sys	0m0,004s
+real	0m0,001s
+user	0m0,000s
+sys	0m0,001s
 
 
 ---Execução 10---
 
-real	0m0,056s
-user	0m0,048s
-sys	0m0,008s
+real	0m0,001s
+user	0m0,001s
+sys	0m0,000s
 
 

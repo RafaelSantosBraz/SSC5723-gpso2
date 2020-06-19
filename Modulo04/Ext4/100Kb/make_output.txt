@@ -1,70 +1,70 @@
 ---Execução 1---
 
-real	0m1,199s
-user	0m0,817s
-sys	0m0,377s
+real	0m0,062s
+user	0m0,051s
+sys	0m0,015s
 
 
 ---Execução 2---
 
-real	0m1,210s
-user	0m0,818s
-sys	0m0,386s
+real	0m0,064s
+user	0m0,058s
+sys	0m0,010s
 
 
 ---Execução 3---
 
-real	0m1,387s
-user	0m0,938s
-sys	0m0,440s
+real	0m0,060s
+user	0m0,049s
+sys	0m0,016s
 
 
 ---Execução 4---
 
-real	0m1,258s
-user	0m0,796s
-sys	0m0,451s
+real	0m0,076s
+user	0m0,054s
+sys	0m0,021s
 
 
 ---Execução 5---
 
-real	0m1,198s
-user	0m0,783s
-sys	0m0,410s
+real	0m0,056s
+user	0m0,046s
+sys	0m0,014s
 
 
 ---Execução 6---
 
-real	0m1,228s
-user	0m0,812s
-sys	0m0,409s
+real	0m0,069s
+user	0m0,054s
+sys	0m0,018s
 
 
 ---Execução 7---
 
-real	0m1,208s
-user	0m0,824s
-sys	0m0,378s
+real	0m0,062s
+user	0m0,040s
+sys	0m0,026s
 
 
 ---Execução 8---
 
-real	0m1,209s
-user	0m0,819s
-sys	0m0,379s
+real	0m0,064s
+user	0m0,049s
+sys	0m0,016s
 
 
 ---Execução 9---
 
-real	0m1,224s
-user	0m0,798s
-sys	0m0,420s
+real	0m0,064s
+user	0m0,051s
+sys	0m0,016s
 
 
 ---Execução 10---
 
-real	0m1,203s
-user	0m0,880s
-sys	0m0,318s
+real	0m0,065s
+user	0m0,055s
+sys	0m0,015s
 
 

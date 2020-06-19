@@ -3,7 +3,7 @@
 
 main() 
 {
-    echo "Tamanho do arquivo em Kb: "
+    echo "Tamanho do arquivo em Kb: (Tamamnho mínimo - 5Kb)"
     read file_size;
 
     result_folder=result
