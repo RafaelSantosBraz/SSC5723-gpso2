@@ -53,6 +53,6 @@ Os resultados das 10 operações de criação, leitura e destruição dos arquiv
 
 ## Empacotamento
 
-Os dados coletados para cada sistema de arquivo neste experimento podem ser encontrados nas pastas [Ext4](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo04/Ext4), [FAT32](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo04/FAT32) e [NTFS](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo04/NTFS).
+Os dados coletados para cada sistema de arquivo neste experimento podem ser encontrados nas pastas [Ext4](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo04/Ext4), [FAT32](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo04/FAT32) e [NTFS](https://github.com/RafaelSantosBraz/SSC5723-gpso2/tree/master/Modulo04/NTFS) deste repositório.
 
 Os dados brutos e as tabelas estão disponíveis neste [link do Google Sheets](https://docs.google.com/spreadsheets/d/14_hjFr-qH5X3917sVOhHBvbvRBKm8kXy5HDCoObJY3c/edit#gid=1747600645&range=G31) 
