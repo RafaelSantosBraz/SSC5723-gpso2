@@ -1,0 +1,70 @@
+---Execução 1---
+
+real	0m2,319s
+user	0m0,082s
+sys	0m0,009s
+
+
+---Execução 2---
+
+real	0m2,679s
+user	0m0,082s
+sys	0m0,013s
+
+
+---Execução 3---
+
+real	0m2,323s
+user	0m0,086s
+sys	0m0,010s
+
+
+---Execução 4---
+
+real	0m2,323s
+user	0m0,093s
+sys	0m0,003s
+
+
+---Execução 5---
+
+real	0m2,322s
+user	0m0,093s
+sys	0m0,006s
+
+
+---Execução 6---
+
+real	0m2,323s
+user	0m0,086s
+sys	0m0,011s
+
+
+---Execução 7---
+
+real	0m2,631s
+user	0m0,087s
+sys	0m0,011s
+
+
+---Execução 8---
+
+real	0m2,318s
+user	0m0,089s
+sys	0m0,008s
+
+
+---Execução 9---
+
+real	0m4,195s
+user	0m0,097s
+sys	0m0,005s
+
+
+---Execução 10---
+
+real	0m2,327s
+user	0m0,087s
+sys	0m0,011s
+
+
