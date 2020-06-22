@@ -47,9 +47,9 @@ Em seguida, deve-se informar o tamanho (em Kb) do arquivo de texto a ser criado,
 Ao fim da execução, os resultados ficam armazenados na pasta *result*, que é criada no mesmo local onde o arquivo *run.sh* foi copiado.
 
 Os resultados das 10 operações de criação, leitura e destruição dos arquivos são registrados, respectivamente, no arquivos:
-*make_output.txt
-*read_output.txt
-*remove_output.txt
+* make_output.txt
+* read_output.txt
+* remove_output.txt
 
 ## Empacotamento
 
